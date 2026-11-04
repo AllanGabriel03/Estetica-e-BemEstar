@@ -1,1 +1,67 @@
-<p>cadastro-cliente works!</p>
+<div id="cadastro">
+    <h2>Cadastro</h2>
+
+    <form [formGroup]="form" (ngSubmit)="salvar()">
+
+        <div class="campo">
+            <label for="nome">Nome completo</label>
+            <input id="nome" type="text" formControlName="nome" placeholder="Ashley Vitoria">
+            @if (campoInvalido('nome')) { <small class="erro"> Informe o nome (mínimo 3 letras). </small>}
+        </div>
+
+        <div class="campo">
+            <label for="cpf">CPF</label>
+            <input id="cpf" type="text" formControlName="cpf" placeholder="00000000000">
+            @if (campoInvalido('cpf')) { <small class="erro"> CPF deve ter 11 números. </small>}
+        </div>
+
+        <div class="campo">
+            <label for="dataNascimento">Data de Nascimento</label>
+            <input id="dataNascimento" type="text" formControlName="dataNascimento">
+            @if (campoInvalido('dataNascimento')) { <small class="erro"> Informe a data. </small>}
+        </div>
+
+        <div class="campo">
+        <label for="sexo">Sexo</label>
+        <select id="sexo" formControlName="sexo">
+          <option value="">Selecione</option>
+          <option value="F">Feminino</option>
+          <option value="M">Masculino</option>
+        </select>
+        @if (campoInvalido('sexo')) { <small class="erro">Selecione uma opção.</small> }
+      </div>
+
+      <div class="campo">
+        <label for="telefone">Telefone</label>
+        <input id="telefone" type="text" formControlName="telefone" maxlength="11" placeholder="79999999999">
+        @if (campoInvalido('telefone')) { <small class="erro">Telefone com DDD (10 ou 11 números).</small> }
+      </div>
+    
+
+     <div class="campo">
+      <label for="email">E-mail</label>
+      <input id="email" type="email" formControlName="email" placeholder="cliente@email.com">
+      @if (campoInvalido('email')) { <small class="erro">Informe um e-mail válido.</small> }
+    </div>
+
+    <div class="campo">
+      <label for="ativoPessoa">Situação</label>
+      <select id="ativoPessoa" formControlName="ativoPessoa">
+        <option value="S">Ativo</option>
+        <option value="N">Inativo</option>
+      </select>
+    </div>
+
+    <div class="acoes">
+      <button type="submit">Cadastrar</button>
+      <button type="button" class="secundario" (click)="limpar()">Limpar</button>
+    </div>
+  </form>
+
+  @if (pessoaCadastrada) {
+    <div class="sucesso">
+      Cliente <strong>{{ pessoaCadastrada.nome }}</strong> cadastrado (simulação).
+    </div>
+  }
+
+</div>

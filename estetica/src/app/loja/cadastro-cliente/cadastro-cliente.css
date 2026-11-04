@@ -1,0 +1,118 @@
+:host {
+  display: block;
+  --cor-principal: #b5707e;
+  --cor-principal-escura: #99596a;
+  --cor-fundo-suave: #fbf3f4;
+  --cor-borda: #e6d5d8;
+  --cor-texto: #3d2f33;
+  --cor-texto-suave: #7a6a6e;
+  --cor-erro: #c0392b;
+  --cor-sucesso: #2e7d6b;
+}
+
+/* ========== CADASTRO ========== */
+
+#cadastro {
+  max-width: 520px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border: 1px solid var(--cor-borda);
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(153, 89, 106, 0.08);
+  color: var(--cor-texto);
+}
+
+#cadastro h2 {
+  margin: 0 0 1.5rem;
+  text-align: center;
+  color: var(--cor-principal-escura);
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.1rem;
+}
+
+.campo label {
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.campo input,
+.campo select {
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--cor-borda);
+  border-radius: 8px;
+  background: var(--cor-fundo-suave);
+  color: var(--cor-texto);
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.campo input:focus,
+.campo select:focus {
+  outline: none;
+  border-color: var(--cor-principal);
+  box-shadow: 0 0 0 3px rgba(181, 112, 126, 0.2);
+  background: #fff;
+}
+
+.campo input.ng-invalid.ng-touched,
+.campo select.ng-invalid.ng-touched {
+  border-color: var(--cor-erro);
+}
+
+.erro {
+  margin-top: 0.3rem;
+  color: var(--cor-erro);
+  font-size: 0.82rem;
+}
+
+.acoes {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.acoes button {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--cor-principal);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.acoes button:hover {
+  background: var(--cor-principal-escura);
+}
+
+.acoes button:active {
+  transform: scale(0.98);
+}
+
+.acoes button.secundario {
+  background: transparent;
+  border: 1px solid var(--cor-borda);
+  color: var(--cor-texto-suave);
+}
+
+.acoes button.secundario:hover {
+  background: var(--cor-fundo-suave);
+}
+
+.sucesso {
+  margin-top: 1.5rem;
+  padding: 0.9rem 1rem;
+  background: #e6f4ee;
+  border-left: 4px solid var(--cor-sucesso);
+  border-radius: 8px;
+  color: var(--cor-sucesso);
+}

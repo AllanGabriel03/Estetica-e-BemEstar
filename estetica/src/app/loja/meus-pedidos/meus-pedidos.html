@@ -1,1 +1,50 @@
-<p>meus-pedidos works!</p>
+<div id="meus-pedidos">
+  <h2>Meus pedidos</h2>
+
+  @if (pedidos.length === 0) {
+    <p class="vazio">Você ainda não fez nenhum pedido.</p>
+  }
+
+  @for (p of pedidos; track p.idAtendimento) {
+    <div class="pedido">
+
+      <div class="cabecalho">
+        <div>
+          <strong>Pedido #{{ p.idAtendimento }}</strong>
+          <span class="data">{{ p.dataAtendimento | date:'dd/MM/yyyy' }}</span>
+        </div>
+        <span class="status" [class]="'status ' + statusClasse(p.statusAtendimento)">
+          {{ p.statusAtendimento }}
+        </span>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Profissional</th>
+            <th>Qtd</th>
+            <th>Valor unit.</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (i of p.itens; track i.idItem) {
+            <tr>
+              <td>{{ i.item }}</td>
+              <td>{{ i.nomeFuncionario }} <small>({{ i.cargo }})</small></td>
+              <td>{{ i.quantidade }}</td>
+              <td>{{ i.valorUnitario | currency:'BRL' }}</td>
+              <td>{{ i.quantidade * i.valorUnitario | currency:'BRL' }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+
+      <div class="total">
+        Total: <strong>{{ total(p) | currency:'BRL' }}</strong>
+      </div>
+
+    </div>
+  }
+</div>

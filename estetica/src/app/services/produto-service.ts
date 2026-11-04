@@ -8,7 +8,7 @@ import { Produto } from '../models/produto';
 })
 export class ProdutoService {
   private http = inject(HttpClient);
-  private apiUrl = 'https://localhost:7000/api/Produto'; // ajuste para a URL da sua API
+  private apiUrl = 'http://localhost:5000/api/ProdutoItem'; 
 
   listar(): Observable<Produto[]> {
     return this.http.get<Produto[]>(this.apiUrl);
