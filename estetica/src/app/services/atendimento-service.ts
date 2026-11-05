@@ -8,7 +8,7 @@ import { AtendimentoAddPut } from '../models/atendimento-add-put';
   providedIn: 'root',
 })
 export class AtendimentoService {
-  private urlBase = 'https://localhost:7000/api/Atendimento'; // use a porta do seu backend
+  private urlBase = 'http://localhost:5000/api/Atendimento';
 
   constructor(private http: HttpClient) {}
 

@@ -1,12 +1,13 @@
 import { Component, signal } from '@angular/core';
 import { CarrinhoService } from '../../services/carrinho';
 import { Router } from '@angular/router';
-import { ProdutoService } from '../../services/produto-service';
 import { ItemCarrinho } from '../../models/item-carrinho';
-import { switchMap } from 'rxjs';
 import { AtendimentoService } from '../../services/atendimento-service';
 import { AtendimentoAddPut } from '../../models/atendimento-add-put';
+import { SessaoService } from '../../services/sessao-service';
 import { ResumoCarrinho } from '../../resumo-carrinho/resumo-carrinho';
+
+const ID_FUNCIONARIO_PADRAO = 2; // precisa ser um idpessoa que exista na tabela funcionario
 
 @Component({
   imports: [ResumoCarrinho],
@@ -21,9 +22,10 @@ export class Carrinho {
     private router: Router,
     private carrinhoService: CarrinhoService,
     private atendimentoService: AtendimentoService,
+    private sessao: SessaoService,
   ) {}
 
-  ngOnInit(){
+  ngOnInit() {
     this.listarItens();
   }
 
@@ -35,9 +37,9 @@ export class Carrinho {
   }
 
   excluirProduto(item: ItemCarrinho) {
-    if (confirm(`Deseja excluir ${item.produto.item} do carrinho? `)){
-       this.carrinhoService.removerDoCarrinho(item.produto.idItem);
-       this.listarItens();
+    if (confirm(`Deseja excluir ${item.produto.item} do carrinho? `)) {
+      this.carrinhoService.removerDoCarrinho(item.produto.idItem);
+      this.listarItens();
     }
   }
 
@@ -45,36 +47,42 @@ export class Carrinho {
     const input = event.target as HTMLInputElement;
     const quantidade = Number(input.value);
 
-    if (quantidade >= 1 && quantidade <= item.produto.quantidadeEstoque){
+    if (quantidade >= 1 && quantidade <= item.produto.quantidadeEstoque) {
       this.carrinhoService.alterarQuantidade(item.produto.idItem, quantidade);
       this.listarItens();
     }
   }
 
-  finalizarPedido(){
+  finalizarPedido() {
     const itens = this.carrinhoService.listar();
-    
+
     if (itens.length === 0) {
       alert('O carrinho está vazio.');
       return;
     }
 
-    const IDPESSOA_TESTE = 1;
-    const IDFUNCIONARIO_PADRAO = 1;
+    const idPessoa = this.sessao.idPessoa();
+    if (!idPessoa) {
+      alert('Faça seu cadastro para finalizar o pedido.');
+      this.router.navigate(['/cadastro']); // ajuste para a sua rota de cadastro
+      return;
+    }
 
     const novoAtendimento: AtendimentoAddPut = {
       idAtendimento: 0,
-      idPessoa: IDPESSOA_TESTE,
-      dataAtendimento: new Date().toISOString().split('T')[0],
-      statusAtendimento: 'Aberto',
+      idPessoa,
+      dataAtendimento: new Date().toLocaleDateString('en-CA'),
+      statusAtendimento: 'A',
       itens: itens.map((item) => ({
         idAtendimento: 0,
         idItem: item.produto.idItem,
-        idFuncionario: IDFUNCIONARIO_PADRAO,
+        idFuncionario: ID_FUNCIONARIO_PADRAO,
         quantidade: item.quantidade,
         valorUnitario: item.produto.precoVenda,
       })),
     };
+
+    console.log('Pedido enviado:', JSON.stringify(novoAtendimento, null, 2));
 
     this.atendimentoService.criar(novoAtendimento).subscribe({
       next: () => {

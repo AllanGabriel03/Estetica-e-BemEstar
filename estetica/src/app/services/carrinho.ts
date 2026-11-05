@@ -1,19 +1,46 @@
-import { Injectable, computed, signal } from '@angular/core';
+import { Injectable, computed, inject, signal } from '@angular/core';
+import { Observable, tap } from 'rxjs';
 import { Produto } from '../models/produto';
 import { ItemCarrinho } from '../models/item-carrinho';
+import { AtendimentoAddPut } from '../models/atendimento-add-put';
+import { AtendimentoService } from './atendimento-service';
 
 @Injectable({ providedIn: 'root' })
 export class CarrinhoService {
+  private atendimentoService = inject(AtendimentoService);
   itens = signal<ItemCarrinho[]>([]);
 
   total = computed(() =>
     this.itens().reduce((soma, i) => soma + i.produto.precoVenda * i.quantidade, 0)
   );
 
-  listar(): ItemCarrinho[] {
-    return this.itens();
-  }
 
+  finalizar(idPessoa: number, idFuncionario: number): Observable<unknown> {
+    const pedido: AtendimentoAddPut = {
+      idAtendimento: 0,
+      idPessoa,
+      dataAtendimento: new Date().toLocaleDateString('en-CA'), // yyyy-MM-dd
+      statusAtendimento: 'Aberto',
+      itens: this.itens().map(i => ({
+        idAtendimento: 0,
+        idItem: i.produto.idItem,
+        idFuncionario,
+        quantidade: i.quantidade,
+        valorUnitario: i.produto.precoVenda
+      }))
+    };
+
+    console.log('Pedido enviado:', JSON.stringify(pedido, null, 2));
+
+    return this.atendimentoService.criar(pedido).pipe(
+      tap(() => this.limparCarrinho())
+    );
+  }
+    listar(): ItemCarrinho[] {
+    return this.itens();
+    }
+
+  
   adicionar(produto: Produto): string {
     const lista = this.itens();
     const existente = lista.find(i => i.produto.idItem === produto.idItem);

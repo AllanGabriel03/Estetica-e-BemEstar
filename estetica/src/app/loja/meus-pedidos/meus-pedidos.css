@@ -101,3 +101,5 @@
   .acoes { flex-direction: column; }
   .cabecalho { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
 }
+
+.status.aberto { background: #e3f0fb; color: #1f5f99; }

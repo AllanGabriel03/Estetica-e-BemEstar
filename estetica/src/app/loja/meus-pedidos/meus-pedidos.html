@@ -1,11 +1,23 @@
 <div id="meus-pedidos">
   <h2>Meus pedidos</h2>
 
-  @if (pedidos.length === 0) {
-    <p class="vazio">Você ainda não fez nenhum pedido.</p>
+  @if (carregando()) {
+    <p class="vazio">Carregando seus pedidos...</p>
+  } @else if (!identificado()) {
+    <p class="vazio">
+      Faça seu cadastro para ver seus pedidos.
+      <a routerLink="/cadastro">Cadastrar</a>
+    </p>
+  } @else if (erro()) {
+    <p class="vazio erro">{{ erro() }}</p>
+  } @else if (pedidos().length === 0) {
+    <p class="vazio">
+      Você ainda não fez nenhum pedido.
+      <a routerLink="/catalogo">Ver catálogo</a>
+    </p>
   }
 
-  @for (p of pedidos; track p.idAtendimento) {
+  @for (p of pedidos(); track p.idAtendimento) {
     <div class="pedido">
 
       <div class="cabecalho">
@@ -13,7 +25,7 @@
           <strong>Pedido #{{ p.idAtendimento }}</strong>
           <span class="data">{{ p.dataAtendimento | date:'dd/MM/yyyy' }}</span>
         </div>
-        <span class="status" [class]="'status ' + statusClasse(p.statusAtendimento)">
+        <span [class]="'status ' + statusClasse(p.statusAtendimento)">
           {{ p.statusAtendimento }}
         </span>
       </div>

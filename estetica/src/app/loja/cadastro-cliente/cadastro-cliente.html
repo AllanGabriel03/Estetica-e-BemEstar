@@ -11,13 +11,13 @@
 
         <div class="campo">
             <label for="cpf">CPF</label>
-            <input id="cpf" type="text" formControlName="cpf" placeholder="00000000000">
+            <input id="cpf" type="text" formControlName="cpf" maxlenght="11" placeholder="00000000000">
             @if (campoInvalido('cpf')) { <small class="erro"> CPF deve ter 11 números. </small>}
         </div>
 
         <div class="campo">
             <label for="dataNascimento">Data de Nascimento</label>
-            <input id="dataNascimento" type="text" formControlName="dataNascimento">
+            <input id="dataNascimento" type="date" formControlName="dataNascimento">
             @if (campoInvalido('dataNascimento')) { <small class="erro"> Informe a data. </small>}
         </div>
 

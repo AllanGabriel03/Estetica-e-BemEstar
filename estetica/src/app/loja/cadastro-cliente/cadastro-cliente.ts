@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Pessoa } from '../../models/pessoa';
+import { SessaoService } from '../../services/sessao-service';
+import { PessoaService } from '../../services/pessoa-service';
 
 @Component({
   imports: [ReactiveFormsModule],
@@ -9,9 +11,12 @@ import { Pessoa } from '../../models/pessoa';
   templateUrl: './cadastro-cliente.html',
 })
 export class CadastroCliente {
-   private fb = inject(FormBuilder);
+  private fb = inject(FormBuilder);
+  private sessao = inject(SessaoService);
+  private pessoaService = inject(PessoaService);
 
   enviado = false;
+  erro = '';
   pessoaCadastrada: Pessoa | null = null;
 
   form = this.fb.nonNullable.group({
@@ -26,6 +31,7 @@ export class CadastroCliente {
 
   salvar() {
     this.enviado = true;
+    this.erro = '';
     if (this.form.invalid) return;
 
     const v = this.form.getRawValue();
@@ -41,14 +47,22 @@ export class CadastroCliente {
       ativoPessoa: v.ativoPessoa
     };
 
-    // Por enquanto só ilustrativo. Depois: this.pessoaService.cadastrar(pessoa).subscribe(...)
-    console.log(pessoa);
-    this.pessoaCadastrada = pessoa;
+    this.pessoaService.cadastrar(pessoa).subscribe({
+      next: (criada) => {
+        this.sessao.definir(criada.idPessoa);
+        this.pessoaCadastrada = criada;
+      },
+      error: (e) => {
+  console.error('Falha ao cadastrar:', JSON.stringify(e.error.errors, null, 2));
+  this.erro = 'Não foi possível cadastrar. Tente novamente.';
+}
+    });
   }
 
   limpar() {
     this.form.reset({ ativoPessoa: 'S' });
     this.enviado = false;
+    this.erro = '';
     this.pessoaCadastrada = null;
   }
 
