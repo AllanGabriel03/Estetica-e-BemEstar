@@ -31,7 +31,7 @@ export class CadastroCliente {
 
   salvar() {
     this.enviado = true;
-    this.erro = '';
+    this.erro.set('');
     if (this.form.invalid) return;
 
     const v = this.form.getRawValue();
@@ -52,11 +52,15 @@ export class CadastroCliente {
         this.sessao.definir(criada.idPessoa);
         this.pessoaCadastrada = criada;
       },
-      error: (e) => {
-  console.error('Falha ao cadastrar:', JSON.stringify(e.error.errors, null, 2));
-  this.erro = 'Não foi possível cadastrar. Tente novamente.';
-}
-    });
+        error: (e) => {
+      console.error('Falha ao cadastrar:', e);
+      this.erro.set(
+        e.status === 409
+          ? (e.error?.mensagem ?? 'CPF já cadastrado.')
+          : 'Não foi possível cadastrar. Tente novamente.'
+      );
+    }
+   });
   }
 
   limpar() {
