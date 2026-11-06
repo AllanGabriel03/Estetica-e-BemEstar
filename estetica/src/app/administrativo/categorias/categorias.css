@@ -1,0 +1,20 @@
+.linha-consulta {
+  display: flex;
+  gap: 8px;
+}
+
+.linha-consulta button {
+  white-space: nowrap;
+}
+
+.consulta-resultado {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: #fdf6fb;
+  border: 1px dashed var(--cor-primaria);
+  border-radius: var(--raio);
+  padding: 14px 16px;
+  margin-bottom: 16px;
+}

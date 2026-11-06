@@ -1,0 +1,123 @@
+<div class="pagina">
+  <div class="topo-secao">
+    <h2>Pedidos</h2>
+    <button type="button" class="btn-secundario" (click)="carregar()" [disabled]="carregando()">
+      Atualizar
+    </button>
+  </div>
+
+  @if (mensagem()) {
+    <div class="msg-sucesso">{{ mensagem() }}</div>
+  }
+  @if (erro()) {
+    <div class="msg-erro">{{ erro() }}</div>
+  }
+
+  <div class="cartao">
+    <div class="filtros">
+      <div class="campo">
+        <label for="status">Situacao</label>
+        <select id="status" [value]="statusFiltro()" (change)="filtrarStatus($event)">
+          <option value="">Todas</option>
+          <option value="A">Aberto</option>
+          <option value="P">Em processamento</option>
+          <option value="F">Concluído</option>
+          <option value="C">Cancelado</option>
+        </select>
+      </div>
+
+      <div class="campo">
+        <label for="busca">Buscar por ID ou cliente</label>
+        <input id="busca" type="search" [value]="busca()" (input)="busca.set($any($event.target).value)" />
+      </div>
+
+      <div class="campo">
+        <label for="idConsulta">Consultar por ID</label>
+        <div class="linha-consulta">
+          <input
+            id="idConsulta"
+            type="number"
+            min="1"
+            [value]="idConsulta()"
+            (input)="idConsulta.set($any($event.target).value)"
+          />
+          <button type="button" (click)="consultarPorId()">Buscar</button>
+        </div>
+      </div>
+    </div>
+
+    @if (consulta(); as c) {
+      <div class="consulta-resultado">
+        <div>
+          <strong>Pedido #{{ c.idAtendimento }} - {{ c.nomePessoa }}</strong>
+          <span [class]="'status ' + statusClasse(c.statusAtendimento)">
+            {{ statusNome(c.statusAtendimento) }}
+          </span>
+          <p>
+            {{ c.dataAtendimento | date:'dd/MM/yyyy' }} ·
+            {{ c.itens.length }} item(ns) ·
+            Total {{ total(c) | currency:'BRL' }}
+          </p>
+        </div>
+        <div class="acoes-consulta">
+          <a [routerLink]="['/admin/pedidos', c.idAtendimento]" class="lnk-acao">Ver detalhe</a>
+          <button type="button" class="lnk-acao" (click)="limparConsulta()">Fechar consulta</button>
+        </div>
+      </div>
+    }
+
+    @if (carregando()) {
+      <p>Carregando pedidos...</p>
+    } @else {
+      <div class="tabela-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Cliente</th>
+              <th>Data</th>
+              <th>Itens</th>
+              <th>Total</th>
+              <th>Situacao</th>
+              <th>Acoes</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (p of filtrados(); track p.idAtendimento) {
+              <tr>
+                <td>#{{ p.idAtendimento }}</td>
+                <td>{{ p.nomePessoa }}</td>
+                <td>{{ p.dataAtendimento | date:'dd/MM/yyyy' }}</td>
+                <td>{{ p.itens.length }}</td>
+                <td>{{ total(p) | currency:'BRL' }}</td>
+                <td>
+                  <span [class]="'status ' + statusClasse(p.statusAtendimento)">
+                    {{ statusNome(p.statusAtendimento) }}
+                  </span>
+                </td>
+                <td class="acoes-tabela">
+                  <a [routerLink]="['/admin/pedidos', p.idAtendimento]" class="lnk-acao">Detalhe</a>
+
+                  @for (s of proximosStatus(p.statusAtendimento); track s.valor) {
+                    <button
+                      type="button"
+                      class="lnk-acao"
+                      [disabled]="atualizandoId() === p.idAtendimento"
+                      (click)="alterarStatus(p, s.valor)"
+                    >
+                      {{ s.rotulo }}
+                    </button>
+                  }
+                </td>
+              </tr>
+            } @empty {
+              <tr>
+                <td colspan="7">Nenhum pedido encontrado.</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </div>
+</div>

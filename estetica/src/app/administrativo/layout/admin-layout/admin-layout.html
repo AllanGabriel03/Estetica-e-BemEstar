@@ -1,0 +1,33 @@
+<header id="cabecalho-admin">
+  <div id="logo-admin">
+    <a routerLink="/admin" class="rota-lnk"> Estética &amp; Bem-Estar · Painel </a>
+  </div>
+
+  <nav id="menu-admin">
+    <ul id="menu-admin-ul">
+      <li>
+        <a
+          routerLink="/admin"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="rota-lnk"
+        >
+          Dashboard
+        </a>
+      </li>
+      <li><a routerLink="/admin/clientes" routerLinkActive="active" class="rota-lnk">Clientes</a></li>
+      <li><a routerLink="/admin/funcionarios" routerLinkActive="active" class="rota-lnk">Funcionários</a></li>
+      <li><a routerLink="/admin/produtos" routerLinkActive="active" class="rota-lnk">Produtos</a></li>
+      <li><a routerLink="/admin/servicos" routerLinkActive="active" class="rota-lnk">Serviços</a></li>
+      <li><a routerLink="/admin/categorias" routerLinkActive="active" class="rota-lnk">Categorias</a></li>
+      <li><a routerLink="/admin/pedidos" routerLinkActive="active" class="rota-lnk">Pedidos</a></li>
+      <li><a routerLink="/admin/estoque" routerLinkActive="active" class="rota-lnk">Estoque</a></li>
+    </ul>
+  </nav>
+
+  <a routerLink="/catalogo" class="rota-lnk btn-loja">Loja Virtual</a>
+</header>
+
+<main class="conteudo-admin">
+  <router-outlet></router-outlet>
+</main>

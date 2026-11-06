@@ -1,0 +1,45 @@
+.linha-consulta {
+  display: flex;
+  gap: 8px;
+}
+
+.linha-consulta button {
+  white-space: nowrap;
+}
+
+.consulta-resultado {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: #fdf6fb;
+  border: 1px dashed var(--cor-primaria);
+  border-radius: var(--raio);
+  padding: 14px 16px;
+  margin-bottom: 16px;
+}
+
+.consulta-resultado p {
+  margin: 4px 0 0;
+}
+
+.acoes-consulta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-start;
+}
+
+.status {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: #eee;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.status.aberto { background: #e3f0fb; color: #1f5f99; }
+.status.processamento { background: #fff4e0; color: #b06a00; }
+.status.concluido { background: #e6f4ec; color: var(--cor-sucesso); }
+.status.cancelado { background: #fbeaea; color: var(--cor-erro); }

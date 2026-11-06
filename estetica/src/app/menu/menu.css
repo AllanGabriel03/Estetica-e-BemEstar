@@ -37,3 +37,75 @@
 .rota-lnk.active {
   background: rgba(255, 255, 255, .2);
 }
+
+#area-cliente {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+}
+
+.saudacao {
+  font-size: 0.9rem;
+  opacity: 0.95;
+}
+
+.btn-sair {
+  background: rgba(255, 255, 255, .15);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, .4);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.btn-sair:hover {
+  background: rgba(255, 255, 255, .28);
+}
+
+.btn-entrar {
+  border: 1px solid rgba(255, 255, 255, .45);
+}
+
+.btn-admin {
+  border: 1px solid rgba(255, 255, 255, .45);
+}
+
+.rota-carrinho {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 10px;
+}
+
+.icone-carrinho {
+  display: block;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.texto-oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.contador {
+  display: inline-block;
+  min-width: 20px;
+  padding: 0 6px;
+  margin-left: 4px;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--cor-primaria-escura);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-align: center;
+}

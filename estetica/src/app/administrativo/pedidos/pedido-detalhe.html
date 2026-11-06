@@ -1,0 +1,84 @@
+<div class="pagina">
+  <div class="topo-secao">
+    <h2>Pedido #{{ id }}</h2>
+    <a routerLink="/admin/pedidos" class="lnk-acao">Voltar para a lista</a>
+  </div>
+
+  @if (mensagem()) {
+    <div class="msg-sucesso">{{ mensagem() }}</div>
+  }
+  @if (erro()) {
+    <div class="msg-erro">{{ erro() }}</div>
+  }
+
+  @if (carregando()) {
+    <p>Carregando pedido...</p>
+  } @else if (pedido(); as p) {
+    <div class="cartao resumo-pedido">
+      <div class="linha-resumo">
+        <span class="rotulo">Cliente</span>
+        <strong>{{ p.nomePessoa }} (ID {{ p.idPessoa }})</strong>
+      </div>
+      <div class="linha-resumo">
+        <span class="rotulo">Data do pedido</span>
+        <strong>{{ p.dataAtendimento | date:'dd/MM/yyyy' }}</strong>
+      </div>
+      <div class="linha-resumo">
+        <span class="rotulo">Situacao atual</span>
+        <span [class]="'status ' + statusClasse(p.statusAtendimento)">
+          {{ statusNome(p.statusAtendimento) }}
+        </span>
+      </div>
+      <div class="linha-resumo">
+        <span class="rotulo">Total do pedido</span>
+        <strong>{{ total() | currency:'BRL' }}</strong>
+      </div>
+    </div>
+
+    @if (proximosStatus(p.statusAtendimento).length > 0) {
+      <div class="cartao acoes-status">
+        <span class="rotulo">Alterar situacao</span>
+        <div class="acoes">
+          @for (s of proximosStatus(p.statusAtendimento); track s.valor) {
+            <button type="button" [disabled]="atualizando()" (click)="alterarStatus(s.valor)">
+              {{ s.rotulo }}
+            </button>
+          }
+        </div>
+      </div>
+    } @else {
+      <p class="aviso-final">Este pedido esta {{ statusNome(p.statusAtendimento).toLowerCase() }} e nao pode mais ser alterado.</p>
+    }
+
+    <div class="cartao tabela-scroll" style="margin-top: 24px;">
+      <h3>Itens do pedido</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Profissional</th>
+            <th>Qtd</th>
+            <th>Valor unit.</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (i of p.itens; track i.idItem) {
+            <tr>
+              <td>{{ i.item }}</td>
+              <td>{{ i.nomeFuncionario }} <small>({{ i.cargo }})</small></td>
+              <td>{{ i.quantidade }}</td>
+              <td>{{ i.valorUnitario | currency:'BRL' }}</td>
+              <td>{{ i.quantidade * i.valorUnitario | currency:'BRL' }}</td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="5">Nenhum item registrado neste pedido.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

@@ -1,11 +1,12 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { Pessoa } from '../../models/pessoa';
 import { SessaoService } from '../../services/sessao-service';
 import { PessoaService } from '../../services/pessoa-service';
 
 @Component({
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   selector: 'app-cadastro-cliente',
   styleUrl: './cadastro-cliente.css',
   templateUrl: './cadastro-cliente.html',
@@ -16,7 +17,8 @@ export class CadastroCliente {
   private pessoaService = inject(PessoaService);
 
   enviado = false;
-  erro = '';
+  carregando = signal(false);
+  erro = signal('');
   pessoaCadastrada: Pessoa | null = null;
 
   form = this.fb.nonNullable.group({
@@ -39,34 +41,39 @@ export class CadastroCliente {
     const pessoa: Pessoa = {
       idPessoa: 0,
       nome: v.nome,
-      cpf: Number(v.cpf),
-      dataNascimento: v.dataNascimento, // "yyyy-MM-dd", compatível com DateOnly
+      cpf: v.cpf,
+      dataNascimento: v.dataNascimento, // "yyyy-MM-dd", compativel com DateOnly
       sexo: v.sexo,
       email: v.email,
       telefone: Number(v.telefone),
       ativoPessoa: v.ativoPessoa
     };
 
+    this.carregando.set(true);
+
     this.pessoaService.cadastrar(pessoa).subscribe({
       next: (criada) => {
-        this.sessao.definir(criada.idPessoa);
+        this.carregando.set(false);
+        this.sessao.entrar(criada);
         this.pessoaCadastrada = criada;
+        this.form.reset({ ativoPessoa: 'S' });
+        this.enviado = false;
       },
-        error: (e) => {
-      console.error('Falha ao cadastrar:', e);
-      this.erro.set(
-        e.status === 409
-          ? (e.error?.mensagem ?? 'CPF já cadastrado.')
-          : 'Não foi possível cadastrar. Tente novamente.'
-      );
-    }
-   });
+      error: (e) => {
+        this.carregando.set(false);
+        this.erro.set(
+          e.status === 409
+            ? (e.error?.mensagem ?? 'CPF ja cadastrado.')
+            : (e.error?.mensagem ?? 'Nao foi possivel cadastrar. Tente novamente.')
+        );
+      }
+    });
   }
 
   limpar() {
     this.form.reset({ ativoPessoa: 'S' });
     this.enviado = false;
-    this.erro = '';
+    this.erro.set('');
     this.pessoaCadastrada = null;
   }
 

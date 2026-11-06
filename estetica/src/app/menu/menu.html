@@ -1,22 +1,44 @@
 <header id="cabecalho">
     <div id="logo">
-        Estética & Bem-Estar
+        <a routerLink="/catalogo" class="rota-lnk"> Estética &amp; Bem-Estar</a>
     </div>
 
     <nav id="menu">
         <ul id="menu-ul">
+            
             <li>
-                <a routerLink="/cadastro" class="rota-lnk"> Cadastro </a>
+                <a routerLink="/servicos" routerLinkActive="active" class="rota-lnk"> Serviços </a>
             </li>
             <li>
-                <a routerLink="/pedidos" class="rota-lnk"> Meus Pedidos </a>
+                <a routerLink="/pedidos" routerLinkActive="active" class="rota-lnk"> Meus Pedidos </a>
             </li>
             <li>
-                <a routerLink="/catalogo" class="rota-lnk"> Catalogo </a>
+                <a
+                    routerLink="/carrinho"
+                    routerLinkActive="active"
+                    class="rota-lnk rota-carrinho"
+                    aria-label="Carrinho"
+                    title="Carrinho"
+                >
+                    <img src="/carrinho-de-compras.png" alt="" class="icone-carrinho" />
+                    <span class="texto-oculto">Carrinho</span>
+                    @if (carrinho.quantidadeTotal() > 0) {
+                        <span class="contador">{{ carrinho.quantidadeTotal() }}</span>
+                    }
+                </a>
             </li>
             <li>
-                <a routerLink="/carrinho" class="rota-lnk"> Carrinho </a>
+                <a routerLink="/admin" class="rota-lnk btn-admin"> Painel Administrativo </a>
             </li>
         </ul>
     </nav>
+
+    <div id="area-cliente">
+        @if (sessao.estaLogado()) {
+            <span class="saudacao">Olá, {{ sessao.cliente()?.nome }}</span>
+            <button type="button" class="btn-sair" (click)="sair()">Sair</button>
+        } @else {
+            <a routerLink="/login" routerLinkActive="active" class="rota-lnk btn-entrar">Entrar</a>
+        }
+    </div>
 </header>

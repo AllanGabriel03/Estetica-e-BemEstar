@@ -1,0 +1,75 @@
+<div class="pagina">
+  <div class="topo-secao">
+    <h2>Visão geral</h2>
+    <button type="button" class="btn-secundario" (click)="carregar()" [disabled]="carregando()">
+      Atualizar
+    </button>
+  </div>
+
+  @if (carregando()) {
+    <p>Carregando resumo...</p>
+  } @else if (erro()) {
+    <div class="msg-erro">{{ erro() }}</div>
+  } @else if (resumo(); as r) {
+    <div class="cards-resumo">
+      <a routerLink="/admin/clientes" class="card-resumo">
+        <span class="rotulo">Clientes</span>
+        <strong>{{ r.totalClientes }}</strong>
+      </a>
+      <a routerLink="/admin/funcionarios" class="card-resumo">
+        <span class="rotulo">Funcionários</span>
+        <strong>{{ r.totalFuncionarios }}</strong>
+      </a>
+      <a routerLink="/admin/produtos" class="card-resumo">
+        <span class="rotulo">Produtos</span>
+        <strong>{{ r.totalProdutos }}</strong>
+      </a>
+      <a routerLink="/admin/servicos" class="card-resumo">
+        <span class="rotulo">Serviços</span>
+        <strong>{{ r.totalServicos }}</strong>
+      </a>
+      <a routerLink="/admin/categorias" class="card-resumo">
+        <span class="rotulo">Categorias</span>
+        <strong>{{ r.totalCategorias }}</strong>
+      </a>
+      <a routerLink="/admin/estoque" class="card-resumo">
+        <span class="rotulo">Itens em estoque</span>
+        <strong>{{ r.totalItensEstoque }}</strong>
+      </a>
+    </div>
+
+    <h3 class="titulo-secao">Pedidos</h3>
+
+    <div class="cards-resumo">
+      <a routerLink="/admin/pedidos" class="card-resumo">
+        <span class="rotulo">Total de pedidos</span>
+        <strong>{{ r.totalPedidos }}</strong>
+      </a>
+      <a routerLink="/admin/pedidos" [queryParams]="{ status: 'A' }" class="card-resumo destaque-aberto">
+        <span class="rotulo">Abertos</span>
+        <strong>{{ r.pedidosAbertos }}</strong>
+      </a>
+      <a routerLink="/admin/pedidos" [queryParams]="{ status: 'P' }" class="card-resumo destaque-processamento">
+        <span class="rotulo">Em processamento</span>
+        <strong>{{ r.pedidosEmProcessamento }}</strong>
+      </a>
+      <a routerLink="/admin/pedidos" [queryParams]="{ status: 'F' }" class="card-resumo destaque-concluido">
+        <span class="rotulo">Concluídos</span>
+        <strong>{{ r.pedidosConcluidos }}</strong>
+      </a>
+      <a routerLink="/admin/pedidos" [queryParams]="{ status: 'C' }" class="card-resumo destaque-cancelado">
+        <span class="rotulo">Cancelados</span>
+        <strong>{{ r.pedidosCancelados }}</strong>
+      </a>
+      <div class="card-resumo destaque-alerta">
+        <span class="rotulo">Estoque baixo (até 5)</span>
+        <strong>{{ r.itensEstoqueBaixo }}</strong>
+      </div>
+    </div>
+
+    <div class="cartao valor-total">
+      <span>Valor total dos pedidos registrados</span>
+      <strong>{{ r.valorTotalPedidos | currency:'BRL' }}</strong>
+    </div>
+  }
+</div>

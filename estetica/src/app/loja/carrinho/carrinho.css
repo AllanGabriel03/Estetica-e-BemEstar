@@ -1,0 +1,136 @@
+#carrinho {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.titulo-carrinho {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.icone-titulo {
+  display: block;
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.layout-carrinho {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 24px;
+  align-items: start;
+}
+
+.coluna-itens {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.coluna-resumo {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: sticky;
+  top: 16px;
+}
+
+#itens-carrinho {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.item-carrinho {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: var(--cor-card);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  padding: 14px 18px;
+}
+
+.dados-produtos {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 180px;
+}
+
+.dados-produtos .categoria {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.55;
+}
+
+.dados-produtos .preco {
+  color: var(--cor-primaria);
+  font-weight: 600;
+}
+
+.dados-produtos small {
+  color: #7a6a6e;
+}
+
+.controle-quantidade {
+  display: flex;
+  flex-direction: column;
+  width: 110px;
+}
+
+.controle-quantidade label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.lnk-excluir {
+  background: none;
+  border: none;
+  color: var(--cor-erro);
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  font: inherit;
+}
+
+.finalizar-pedido {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn-finalizar {
+  width: 100%;
+}
+
+.dica {
+  color: #7a6a6e;
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.vazio {
+  text-align: center;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 860px) {
+  .layout-carrinho {
+    grid-template-columns: 1fr;
+  }
+
+  .coluna-resumo {
+    position: static;
+  }
+}

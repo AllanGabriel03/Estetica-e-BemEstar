@@ -1,1 +1,13 @@
-<p>resumo-carrinho works!</p>
+@if (carrinho.quantidadeTotal() > 0) {
+  <div class="resumo cartao">
+    <div class="linha">
+      <span>Itens no carrinho</span>
+      <strong>{{ carrinho.quantidadeTotal() }}</strong>
+    </div>
+
+    <div class="linha total">
+      <span>Total</span>
+      <strong>{{ carrinho.total() | currency:'BRL' }}</strong>
+    </div>
+  </div>
+}

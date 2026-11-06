@@ -1,0 +1,89 @@
+<div class="pagina">
+  <div class="topo-secao">
+    <h2>Editar cliente</h2>
+    <a routerLink="/admin/clientes" class="lnk-acao">Voltar para a lista</a>
+  </div>
+
+  @if (carregando()) {
+    <p>Carregando cliente...</p>
+  } @else {
+    <div class="cartao">
+      <form [formGroup]="form" (ngSubmit)="salvar()">
+        <div class="grid-form">
+          <div class="campo">
+            <label for="nome">Nome completo</label>
+            <input id="nome" type="text" formControlName="nome" />
+            @if (campoInvalido('nome')) {
+              <small class="erro">Informe o nome (minimo 3 letras).</small>
+            }
+          </div>
+
+          <div class="campo">
+            <label for="cpf">CPF</label>
+            <input id="cpf" type="text" inputmode="numeric" maxlength="11" formControlName="cpf" />
+            @if (campoInvalido('cpf')) {
+              <small class="erro">O CPF deve ter 11 numeros.</small>
+            }
+          </div>
+
+          <div class="campo">
+            <label for="dataNascimento">Data de nascimento</label>
+            <input id="dataNascimento" type="date" formControlName="dataNascimento" />
+            @if (campoInvalido('dataNascimento')) {
+              <small class="erro">Informe a data de nascimento.</small>
+            }
+          </div>
+
+          <div class="campo">
+            <label for="sexo">Sexo</label>
+            <select id="sexo" formControlName="sexo">
+              <option value="">Selecione</option>
+              <option value="F">Feminino</option>
+              <option value="M">Masculino</option>
+            </select>
+            @if (campoInvalido('sexo')) {
+              <small class="erro">Selecione uma opcao.</small>
+            }
+          </div>
+
+          <div class="campo">
+            <label for="email">E-mail</label>
+            <input id="email" type="email" formControlName="email" />
+            @if (campoInvalido('email')) {
+              <small class="erro">Informe um e-mail valido.</small>
+            }
+          </div>
+
+          <div class="campo">
+            <label for="telefone">Telefone</label>
+            <input id="telefone" type="text" inputmode="numeric" maxlength="11" formControlName="telefone" />
+            @if (campoInvalido('telefone')) {
+              <small class="erro">Telefone com DDD (10 ou 11 numeros).</small>
+            }
+          </div>
+
+          <div class="campo">
+            <label for="ativoPessoa">Situacao</label>
+            <select id="ativoPessoa" formControlName="ativoPessoa">
+              <option value="S">Ativo</option>
+              <option value="N">Inativo</option>
+            </select>
+          </div>
+        </div>
+
+        @if (mensagem()) {
+          <div class="msg-sucesso">{{ mensagem() }}</div>
+        }
+        @if (erro()) {
+          <div class="msg-erro">{{ erro() }}</div>
+        }
+
+        <div class="acoes">
+          <button type="submit">Salvar alteracoes</button>
+          <a routerLink="/admin/clientes" class="link-botao btn-secundario">Cancelar</a>
+          <button type="button" class="btn-perigo" (click)="excluir()">Excluir cliente</button>
+        </div>
+      </form>
+    </div>
+  }
+</div>

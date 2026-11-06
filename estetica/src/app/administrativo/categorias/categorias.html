@@ -1,0 +1,102 @@
+<div class="pagina">
+  <div class="topo-secao">
+    <h2>Categorias</h2>
+    @if (editandoId()) {
+      <button type="button" class="btn-secundario" (click)="cancelarEdicao()">
+        Cancelar edicao
+      </button>
+    }
+  </div>
+
+  @if (mensagem()) {
+    <div class="msg-sucesso">{{ mensagem() }}</div>
+  }
+  @if (erro()) {
+    <div class="msg-erro">{{ erro() }}</div>
+  }
+
+  <div class="cartao">
+    <h3>{{ editandoId() ? 'Editar categoria #' + editandoId() : 'Nova categoria' }}</h3>
+
+    <form [formGroup]="form" (ngSubmit)="salvar()">
+      <div class="campo">
+        <label for="categoria">Nome da categoria</label>
+        <input id="categoria" type="text" formControlName="categoria" maxlength="35" />
+        @if (campoInvalido('categoria')) {
+          <small class="erro">Informe o nome (entre 2 e 35 caracteres).</small>
+        }
+      </div>
+
+      <div class="acoes">
+        <button type="submit" [disabled]="salvando()">
+          {{ salvando() ? 'Salvando...' : (editandoId() ? 'Salvar alteracoes' : 'Cadastrar categoria') }}
+        </button>
+        <button type="button" class="btn-secundario" (click)="cancelarEdicao()">Limpar</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="cartao" style="margin-top: 24px;">
+    <div class="filtros">
+      <div class="campo">
+        <label for="busca">Buscar por nome</label>
+        <input id="busca" type="search" [value]="busca()" (input)="busca.set($any($event.target).value)" />
+      </div>
+
+      <div class="campo">
+        <label for="idConsulta">Consultar por ID</label>
+        <div class="linha-consulta">
+          <input
+            id="idConsulta"
+            type="number"
+            min="1"
+            [value]="idConsulta()"
+            (input)="idConsulta.set($any($event.target).value)"
+          />
+          <button type="button" (click)="consultarPorId()">Buscar</button>
+        </div>
+      </div>
+    </div>
+
+    @if (consulta(); as c) {
+      <div class="consulta-resultado">
+        <div>
+          <strong>Categoria #{{ c.idcategoria }} - {{ c.categoria }}</strong>
+        </div>
+        <button type="button" class="lnk-acao" (click)="limparConsulta()">Fechar consulta</button>
+      </div>
+    }
+
+    @if (carregando()) {
+      <p>Carregando categorias...</p>
+    } @else {
+      <div class="tabela-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Categoria</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (c of filtradas(); track c.idcategoria) {
+              <tr>
+                <td>{{ c.idcategoria }}</td>
+                <td>{{ c.categoria }}</td>
+                <td class="acoes-tabela">
+                  <button type="button" class="lnk-acao" (click)="editar(c)">Editar</button>
+                  <button type="button" class="lnk-acao" (click)="excluir(c)">Excluir</button>
+                </td>
+              </tr>
+            } @empty {
+              <tr>
+                <td colspan="3">Nenhuma categoria encontrada.</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </div>
+</div>

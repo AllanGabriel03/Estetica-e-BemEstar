@@ -1,0 +1,49 @@
+.resumo-pedido {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.linha-resumo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.rotulo {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.6;
+}
+
+.acoes-status {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+
+.aviso-final {
+  margin-top: 16px;
+  padding: 10px 14px;
+  background: #f3f3f3;
+  border-radius: var(--raio);
+  color: #555;
+}
+
+.status {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: #eee;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.status.aberto { background: #e3f0fb; color: #1f5f99; }
+.status.processamento { background: #fff4e0; color: #b06a00; }
+.status.concluido { background: #e6f4ec; color: var(--cor-sucesso); }
+.status.cancelado { background: #fbeaea; color: var(--cor-erro); }

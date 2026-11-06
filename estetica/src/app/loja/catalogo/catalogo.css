@@ -4,6 +4,15 @@
   padding: 24px 16px;
 }
 
+.topo-catalogo {
+  margin-bottom: 20px;
+}
+
+.subtitulo {
+  color: #7a6a6e;
+  font-size: 0.95rem;
+}
+
 #div-lista-produtos {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -21,14 +30,81 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, .05);
   transition: transform .2s, box-shadow .2s;
 }
-.div-item-produto:hover {
+.div-item-produto:hover,
+.div-item-produto:focus-within {
   transform: translateY(-3px);
   box-shadow: 0 6px 14px rgba(0, 0, 0, .1);
 }
 
-.info-produto h3 { color: var(--cor-primaria-escura); margin-bottom: 6px; }
-.info-produto p { font-size: .9rem; margin-bottom: 6px; }
-.info-produto strong { font-size: 1.2rem; color: var(--cor-primaria); }
+.info-produto {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Categoria: pequena, discreta e meio transparente */
+.categoria-produto {
+  font-size: .7rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  opacity: .55;
+  margin-bottom: 4px;
+}
+
+/* Item: o destaque do card */
+.nome-produto {
+  font-size: 1.35rem;
+  line-height: 1.25;
+  color: var(--cor-primaria-escura);
+  margin: 0 0 8px;
+}
+
+/* Descrição: escondida, aparece ao passar o mouse */
+.descricao-produto {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows .25s ease, opacity .25s ease;
+}
+.descricao-produto p {
+  overflow: hidden;
+  min-height: 0;
+  margin: 0;
+  font-size: .9rem;
+}
+.div-item-produto:hover .descricao-produto,
+.div-item-produto:focus-within .descricao-produto {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  margin-bottom: 8px;
+}
+
+.preco-produto {
+  font-size: 1.1rem;
+  color: var(--cor-primaria);
+  margin-top: 4px;
+}
+
+.estoque {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: .8rem;
+  opacity: .7;
+  width: fit-content;
+}
+.estoque.tag-inativo {
+  opacity: 1;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
 
 .btns-catalogo { margin-top: 14px; }
 .btns-catalogo button { width: 100%; }
+
+/* Celular/tablet não tem "passar o mouse": mostra a descrição sempre */
+@media (hover: none) {
+  .descricao-produto {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    margin-bottom: 8px;
+  }
+}

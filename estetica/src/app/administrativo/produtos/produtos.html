@@ -1,0 +1,191 @@
+<div class="pagina">
+  <div class="topo-secao">
+    <h2>Produtos</h2>
+    @if (editandoId()) {
+      <button type="button" class="btn-secundario" (click)="cancelarEdicao()">Cancelar edicao</button>
+    }
+  </div>
+
+  @if (mensagem()) {
+    <div class="msg-sucesso">{{ mensagem() }}</div>
+  }
+  @if (erro()) {
+    <div class="msg-erro">{{ erro() }}</div>
+  }
+
+  <div class="cartao">
+    <h3>{{ editandoId() ? 'Editar produto #' + editandoId() : 'Novo produto' }}</h3>
+
+    <form [formGroup]="form" (ngSubmit)="salvar()">
+      <div class="grid-form">
+        <div class="campo">
+          <label for="item">Nome do produto</label>
+          <input id="item" type="text" formControlName="item" maxlength="40" />
+          @if (campoInvalido('item')) {
+            <small class="erro">Informe o nome (maximo 40 caracteres).</small>
+          }
+        </div>
+
+        <div class="campo">
+          <label for="idCategoria">Categoria</label>
+          <select id="idCategoria" formControlName="idCategoria">
+            <option [ngValue]="0">Selecione</option>
+            @for (c of categorias(); track c.idcategoria) {
+              <option [ngValue]="c.idcategoria">{{ c.categoria }}</option>
+            }
+          </select>
+          @if (campoInvalido('idCategoria')) {
+            <small class="erro">Selecione a categoria.</small>
+          }
+        </div>
+
+        <div class="campo">
+          <label for="unidade">Unidade</label>
+          <input id="unidade" type="text" formControlName="unidade" maxlength="10" placeholder="UN, ML, KG..." />
+          @if (campoInvalido('unidade')) {
+            <small class="erro">Informe a unidade (maximo 10 caracteres).</small>
+          }
+        </div>
+
+        <div class="campo">
+          <label for="preco">Preco de custo (R$)</label>
+          <input id="preco" type="number" min="0" step="0.01" formControlName="preco" />
+          @if (campoInvalido('preco')) {
+            <small class="erro">Informe um preco de custo valido.</small>
+          }
+        </div>
+
+        <div class="campo">
+          <label for="codigoPreco">Codigo de preco</label>
+          <select id="codigoPreco" formControlName="codigoPreco">
+            <option [ngValue]="1">1 - Custo + 4%</option>
+            <option [ngValue]="2">2 - Custo + 8%</option>
+            <option [ngValue]="3">3 - Custo + 10%</option>
+            <option [ngValue]="4">4 - Sem acrescimo</option>
+          </select>
+        </div>
+
+        <div class="campo">
+          <label for="precoVenda">Preco de venda (R$)</label>
+          <input id="precoVenda" type="number" min="0" step="0.01" formControlName="precoVenda" />
+          <small class="dica">Deixe 0 para o backend calcular pelo codigo de preco.</small>
+        </div>
+
+        <div class="campo">
+          <label for="ativoProdutoServico">Situacao</label>
+          <select id="ativoProdutoServico" formControlName="ativoProdutoServico">
+            <option value="S">Ativo</option>
+            <option value="N">Inativo</option>
+          </select>
+        </div>
+
+        <div class="campo campo-largo">
+          <label for="descricaoItem">Descricao</label>
+          <textarea id="descricaoItem" rows="2" formControlName="descricaoItem" maxlength="200"></textarea>
+          @if (campoInvalido('descricaoItem')) {
+            <small class="erro">Informe a descricao (maximo 200 caracteres).</small>
+          }
+        </div>
+      </div>
+
+      <div class="acoes">
+        <button type="submit" [disabled]="salvando()">
+          {{ salvando() ? 'Salvando...' : (editandoId() ? 'Salvar alteracoes' : 'Cadastrar produto') }}
+        </button>
+        <button type="button" class="btn-secundario" (click)="cancelarEdicao()">Limpar</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="cartao" style="margin-top: 24px;">
+    <div class="filtros">
+      <div class="campo">
+        <label for="busca">Buscar por nome ou descricao</label>
+        <input id="busca" type="search" [value]="busca()" (input)="busca.set($any($event.target).value)" />
+      </div>
+
+      <div class="campo">
+        <label for="categoriaFiltro">Categoria</label>
+        <select id="categoriaFiltro" [value]="idCategoriaFiltro()" (change)="idCategoriaFiltro.set(+$any($event.target).value)">
+          <option value="0">Todas</option>
+          @for (c of categorias(); track c.idcategoria) {
+            <option [value]="c.idcategoria">{{ c.categoria }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="campo">
+        <label for="idConsulta">Consultar por ID</label>
+        <div class="linha-consulta">
+          <input id="idConsulta" type="number" min="1" [value]="idConsulta()" (input)="idConsulta.set($any($event.target).value)" />
+          <button type="button" (click)="consultarPorId()">Buscar</button>
+        </div>
+      </div>
+    </div>
+
+    @if (consulta(); as p) {
+      <div class="consulta-resultado">
+        <div>
+          <strong>Produto #{{ p.idItem }} - {{ p.item }}</strong>
+          <span class="tag" [class.tag-ativo]="p.ativoProdutoServico === 'S'" [class.tag-inativo]="p.ativoProdutoServico !== 'S'">
+            {{ p.ativoProdutoServico === 'S' ? 'Ativo' : 'Inativo' }}
+          </span>
+          <p>{{ p.descricaoItem }}</p>
+          <small>Categoria: {{ p.categoria }} | Custo: {{ p.preco | currency:'BRL' }} | Venda: {{ p.precoVenda | currency:'BRL' }} | Estoque: {{ p.quantidadeEstoque }} {{ p.unidade }}</small>
+        </div>
+        <button type="button" class="lnk-acao" (click)="limparConsulta()">Fechar consulta</button>
+      </div>
+    }
+
+    @if (carregando()) {
+      <p>Carregando produtos...</p>
+    } @else {
+      <div class="tabela-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Produto</th>
+              <th>Categoria</th>
+              <th>Custo</th>
+              <th>Venda</th>
+              <th>Unidade</th>
+              <th>Estoque</th>
+              <th>Situacao</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (p of filtrados(); track p.idItem) {
+              <tr>
+                <td>{{ p.idItem }}</td>
+                <td>{{ p.item }}</td>
+                <td>{{ p.categoria }}</td>
+                <td>{{ p.preco | currency:'BRL' }}</td>
+                <td>{{ p.precoVenda | currency:'BRL' }}</td>
+                <td>{{ p.unidade }}</td>
+                <td>{{ p.quantidadeEstoque }}</td>
+                <td>
+                  <span class="tag" [class.tag-ativo]="p.ativoProdutoServico === 'S'" [class.tag-inativo]="p.ativoProdutoServico !== 'S'">
+                    {{ p.ativoProdutoServico === 'S' ? 'Ativo' : 'Inativo' }}
+                  </span>
+                </td>
+                <td class="acoes-tabela">
+                  <button type="button" class="lnk-acao" (click)="editar(p)">Editar</button>
+                  <button type="button" class="lnk-acao" (click)="alternarSituacao(p)">
+                    {{ p.ativoProdutoServico === 'S' ? 'Desativar' : 'Ativar' }}
+                  </button>
+                  <button type="button" class="lnk-acao" (click)="excluir(p)">Excluir</button>
+                </td>
+              </tr>
+            } @empty {
+              <tr>
+                <td colspan="9">Nenhum produto encontrado.</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </div>
+</div>

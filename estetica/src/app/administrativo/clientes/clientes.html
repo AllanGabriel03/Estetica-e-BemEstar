@@ -1,0 +1,62 @@
+<div class="pagina">
+  <div class="topo-secao">
+    <h2>Clientes</h2>
+    <a routerLink="/cadastro" class="link-botao">Novo cliente</a>
+  </div>
+
+  <div class="filtros">
+    <div class="campo">
+      <label for="busca">Buscar</label>
+      <input
+        id="busca"
+        type="search"
+        [value]="busca()"
+        (input)="filtrar($event)"
+        placeholder="Nome, CPF ou e-mail"
+      />
+    </div>
+  </div>
+
+  @if (carregando()) {
+    <p>Carregando clientes...</p>
+  } @else if (erro()) {
+    <div class="msg-erro">{{ erro() }}</div>
+  } @else {
+    <div class="cartao tabela-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>E-mail</th>
+            <th>Telefone</th>
+            <th>Situacao</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (p of filtradas(); track p.idPessoa) {
+            <tr>
+              <td>{{ p.nome }}</td>
+              <td>{{ formatarCpf(p.cpf) }}</td>
+              <td>{{ p.email }}</td>
+              <td>{{ p.telefone }}</td>
+              <td>
+                <span [class]="p.ativoPessoa === 'S' ? 'tag tag-ativo' : 'tag tag-inativo'">
+                  {{ p.ativoPessoa === 'S' ? 'Ativo' : 'Inativo' }}
+                </span>
+              </td>
+              <td>
+                <a [routerLink]="['/admin/clientes', p.idPessoa]" class="lnk-acao">Editar / consultar</a>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="6">Nenhum cliente encontrado.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

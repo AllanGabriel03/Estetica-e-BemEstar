@@ -11,7 +11,7 @@
 
         <div class="campo">
             <label for="cpf">CPF</label>
-            <input id="cpf" type="text" formControlName="cpf" maxlenght="11" placeholder="00000000000">
+            <input id="cpf" type="text" inputmode="numeric" formControlName="cpf" maxlength="11" placeholder="00000000000">
             @if (campoInvalido('cpf')) { <small class="erro"> CPF deve ter 11 números. </small>}
         </div>
 
@@ -33,7 +33,7 @@
 
       <div class="campo">
         <label for="telefone">Telefone</label>
-        <input id="telefone" type="text" formControlName="telefone" maxlength="11" placeholder="79999999999">
+        <input id="telefone" type="text" inputmode="numeric" formControlName="telefone" maxlength="11" placeholder="79999999999">
         @if (campoInvalido('telefone')) { <small class="erro">Telefone com DDD (10 ou 11 números).</small> }
       </div>
     
@@ -52,15 +52,22 @@
       </select>
     </div>
 
+    @if (erro()) {
+      <div class="msg-erro">{{ erro() }}</div>
+    }
+
     <div class="acoes">
-      <button type="submit">Cadastrar</button>
+      <button type="submit" [disabled]="carregando()">
+        {{ carregando() ? 'Cadastrando...' : 'Cadastrar' }}
+      </button>
       <button type="button" class="secundario" (click)="limpar()">Limpar</button>
     </div>
   </form>
 
   @if (pessoaCadastrada) {
     <div class="sucesso">
-      Cliente <strong>{{ pessoaCadastrada.nome }}</strong> cadastrado (simulação).
+      Cliente <strong>{{ pessoaCadastrada.nome }}</strong> cadastrado com sucesso!
+      Você já está conectado. <a routerLink="/catalogo">Ir para o catálogo</a>
     </div>
   }
 

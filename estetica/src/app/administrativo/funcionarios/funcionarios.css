@@ -1,0 +1,10 @@
+h3 {
+  margin-bottom: 16px;
+  color: var(--cor-primaria-escura);
+}
+
+.acoes-tabela {
+  display: flex;
+  gap: 12px;
+  white-space: nowrap;
+}

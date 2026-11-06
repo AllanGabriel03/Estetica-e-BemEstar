@@ -1,0 +1,145 @@
+<div class="pagina">
+  <div class="topo-secao">
+    <h2>Funcionarios</h2>
+    @if (editandoId()) {
+      <button type="button" class="btn-secundario" (click)="cancelarEdicao()">
+        Cancelar edicao
+      </button>
+    }
+  </div>
+
+  <div class="cartao">
+    <h3>{{ editandoId() ? 'Editar funcionario' : 'Novo funcionario' }}</h3>
+
+    <form [formGroup]="form" (ngSubmit)="salvar()">
+      <div class="grid-form">
+        <div class="campo">
+          <label for="nome">Nome completo</label>
+          <input id="nome" type="text" formControlName="nome" />
+          @if (campoInvalido('nome')) {
+            <small class="erro">Informe o nome (minimo 3 letras).</small>
+          }
+        </div>
+
+        <div class="campo">
+          <label for="cpf">CPF</label>
+          <input id="cpf" type="text" inputmode="numeric" maxlength="11" formControlName="cpf" />
+          @if (campoInvalido('cpf')) {
+            <small class="erro">O CPF deve ter 11 numeros.</small>
+          }
+        </div>
+
+        <div class="campo">
+          <label for="dataNascimento">Data de nascimento</label>
+          <input id="dataNascimento" type="date" formControlName="dataNascimento" />
+          @if (campoInvalido('dataNascimento')) {
+            <small class="erro">Informe a data de nascimento.</small>
+          }
+        </div>
+
+        <div class="campo">
+          <label for="sexo">Sexo</label>
+          <select id="sexo" formControlName="sexo">
+            <option value="F">Feminino</option>
+            <option value="M">Masculino</option>
+          </select>
+        </div>
+
+        <div class="campo">
+          <label for="email">E-mail</label>
+          <input id="email" type="email" formControlName="email" />
+          @if (campoInvalido('email')) {
+            <small class="erro">Informe um e-mail valido.</small>
+          }
+        </div>
+
+        <div class="campo">
+          <label for="telefone">Telefone</label>
+          <input id="telefone" type="text" inputmode="numeric" maxlength="11" formControlName="telefone" />
+          @if (campoInvalido('telefone')) {
+            <small class="erro">Telefone com DDD (10 ou 11 numeros).</small>
+          }
+        </div>
+
+        <div class="campo">
+          <label for="cargo">Cargo</label>
+          <input id="cargo" type="text" formControlName="cargo" />
+          @if (campoInvalido('cargo')) {
+            <small class="erro">Informe o cargo (maximo 20 caracteres).</small>
+          }
+        </div>
+
+        <div class="campo">
+          <label for="dataAdmissao">Data de admissao</label>
+          <input id="dataAdmissao" type="date" formControlName="dataAdmissao" />
+          @if (campoInvalido('dataAdmissao')) {
+            <small class="erro">Informe a data de admissao.</small>
+          }
+        </div>
+
+        <div class="campo">
+          <label for="ativoPessoa">Situacao</label>
+          <select id="ativoPessoa" formControlName="ativoPessoa">
+            <option value="S">Ativo</option>
+            <option value="N">Inativo</option>
+          </select>
+        </div>
+      </div>
+
+      @if (mensagem()) {
+        <div class="msg-sucesso">{{ mensagem() }}</div>
+      }
+      @if (erro()) {
+        <div class="msg-erro">{{ erro() }}</div>
+      }
+
+      <div class="acoes">
+        <button type="submit" [disabled]="salvando()">
+          {{ salvando() ? 'Salvando...' : (editandoId() ? 'Salvar alteracoes' : 'Cadastrar funcionario') }}
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="cartao tabela-scroll" style="margin-top: 24px;">
+    @if (carregando()) {
+      <p>Carregando funcionarios...</p>
+    } @else {
+      <table>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Cargo</th>
+            <th>Admissao</th>
+            <th>Situacao</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (f of funcionarios(); track f.idPessoa) {
+            <tr>
+              <td>{{ f.nome }}</td>
+              <td>{{ formatarCpf(f.cpf) }}</td>
+              <td>{{ f.cargo }}</td>
+              <td>{{ f.dataAdmissao | date:'dd/MM/yyyy' }}</td>
+              <td>
+                <span [class]="f.ativoPessoa === 'S' ? 'tag tag-ativo' : 'tag tag-inativo'">
+                  {{ f.ativoPessoa === 'S' ? 'Ativo' : 'Inativo' }}
+                </span>
+              </td>
+              <td class="acoes-tabela">
+                <button type="button" class="lnk-acao" (click)="editar(f)">Editar</button>
+                <button type="button" class="lnk-acao" (click)="excluir(f)">Excluir</button>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="6">Nenhum funcionario cadastrado.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  </div>
+</div>

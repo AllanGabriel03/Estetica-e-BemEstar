@@ -1,0 +1,62 @@
+.cards-resumo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.card-resumo {
+  background: var(--cor-card);
+  border: 1px solid var(--cor-borda);
+  border-left: 4px solid var(--cor-primaria);
+  border-radius: var(--raio);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--cor-texto);
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .04);
+}
+
+.card-resumo:hover {
+  border-left-color: var(--cor-primaria-escura);
+  background: #fdf9fc;
+}
+
+.card-resumo .rotulo {
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.65;
+}
+
+.card-resumo strong {
+  font-size: 1.8rem;
+  color: var(--cor-primaria-escura);
+}
+
+.titulo-secao {
+  margin: 28px 0 14px;
+  color: var(--cor-primaria-escura);
+}
+
+.destaque-aberto { border-left-color: #1f5f99; }
+.destaque-processamento { border-left-color: #b06a00; }
+.destaque-concluido { border-left-color: var(--cor-sucesso); }
+.destaque-cancelado { border-left-color: var(--cor-erro); }
+.destaque-alerta { border-left-color: #b06a00; }
+
+.valor-total {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.valor-total strong {
+  font-size: 1.4rem;
+  color: var(--cor-primaria-escura);
+}

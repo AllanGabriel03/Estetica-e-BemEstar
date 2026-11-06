@@ -1,0 +1,802 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "AplicacaoBackAula",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/Categorium": {
+      "get": {
+        "tags": [
+          "Categorium"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Categorium"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Categorium"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Categorium"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Categorium"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Categorium"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Categorium"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Categorium"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Categorium"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Categorium"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Categorium"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Categorium/{id}": {
+      "get": {
+        "tags": [
+          "Categorium"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Categorium"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Categorium"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Categorium"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Categorium"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Categorium"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Categorium"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Categorium"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Categorium"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Produto": {
+      "get": {
+        "tags": [
+          "Produto"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Produto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Produto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Produto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Produto"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProdutoDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProdutoDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProdutoDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Produto/{id}": {
+      "get": {
+        "tags": [
+          "Produto"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Produto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Produto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Produto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Produto"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Produto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Produto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Produto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Produto"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/WeatherForecast": {
+      "get": {
+        "tags": [
+          "WeatherForecast"
+        ],
+        "operationId": "GetWeatherForecast",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Atendimento": {
+        "type": "object",
+        "properties": {
+          "idatendimento": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idpessoa": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dataAtendimento": {
+            "type": "string",
+            "format": "date"
+          },
+          "statusAtendimento": {
+            "type": "string",
+            "nullable": true
+          },
+          "atendimentoitems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Atendimentoitem"
+            },
+            "nullable": true
+          },
+          "idpessoaNavigation": {
+            "$ref": "#/components/schemas/Pessoa"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Atendimentoitem": {
+        "type": "object",
+        "properties": {
+          "idatendimento": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "iditem": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idfuncionario": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "quantidadeItens": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "valorunitarioEntrada": {
+            "type": "number",
+            "format": "double"
+          },
+          "idatendimentoNavigation": {
+            "$ref": "#/components/schemas/Atendimento"
+          },
+          "idfuncionarioNavigation": {
+            "$ref": "#/components/schemas/Funcionario"
+          },
+          "iditemNavigation": {
+            "$ref": "#/components/schemas/Item"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Categorium": {
+        "type": "object",
+        "properties": {
+          "idcategoria": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "categoria": {
+            "type": "string",
+            "nullable": true
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Item"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Endereco": {
+        "type": "object",
+        "properties": {
+          "idendereco": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idpessoa": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cep": {
+            "type": "string",
+            "nullable": true
+          },
+          "numero": {
+            "type": "string",
+            "nullable": true
+          },
+          "complemento": {
+            "type": "string",
+            "nullable": true
+          },
+          "idpessoaNavigation": {
+            "$ref": "#/components/schemas/Pessoa"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EntradaProduto": {
+        "type": "object",
+        "properties": {
+          "identradaProduto": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "iditem": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dataEntradaProduto": {
+            "type": "string",
+            "format": "date"
+          },
+          "quantidadeEntrada": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "unidade": {
+            "type": "string",
+            "nullable": true
+          },
+          "valorUnitarioEntrada": {
+            "type": "number",
+            "format": "double"
+          },
+          "iditemNavigation": {
+            "$ref": "#/components/schemas/Estoque"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Estoque": {
+        "type": "object",
+        "properties": {
+          "iditem": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "quantidadeEstoque": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "entradaProdutos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntradaProduto"
+            },
+            "nullable": true
+          },
+          "iditemNavigation": {
+            "$ref": "#/components/schemas/Produto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Funcionario": {
+        "type": "object",
+        "properties": {
+          "idpessoa": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cargo": {
+            "type": "string",
+            "nullable": true
+          },
+          "dataAdmissao": {
+            "type": "string",
+            "format": "date"
+          },
+          "atendimentoitems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Atendimentoitem"
+            },
+            "nullable": true
+          },
+          "idpessoaNavigation": {
+            "$ref": "#/components/schemas/Pessoa"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Item": {
+        "type": "object",
+        "properties": {
+          "iditem": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idcategoria": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "item1": {
+            "type": "string",
+            "nullable": true
+          },
+          "descricaoItem": {
+            "type": "string",
+            "nullable": true
+          },
+          "preco": {
+            "type": "number",
+            "format": "double"
+          },
+          "tipoItem": {
+            "type": "string",
+            "nullable": true
+          },
+          "ativoProdutoServico": {
+            "type": "string",
+            "nullable": true
+          },
+          "atendimentoitems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Atendimentoitem"
+            },
+            "nullable": true
+          },
+          "idcategoriaNavigation": {
+            "$ref": "#/components/schemas/Categorium"
+          },
+          "produto": {
+            "$ref": "#/components/schemas/Produto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Pessoa": {
+        "type": "object",
+        "properties": {
+          "idpessoa": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "cpf": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "dataNascimento": {
+            "type": "string",
+            "format": "date"
+          },
+          "sexo": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefone": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "ativoPessoa": {
+            "type": "string",
+            "nullable": true
+          },
+          "atendimentos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Atendimento"
+            },
+            "nullable": true
+          },
+          "enderecos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Endereco"
+            },
+            "nullable": true
+          },
+          "funcionario": {
+            "$ref": "#/components/schemas/Funcionario"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Produto": {
+        "type": "object",
+        "properties": {
+          "iditem": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "codigoPreco": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "precoVenda": {
+            "type": "number",
+            "format": "double"
+          },
+          "unidade": {
+            "type": "string",
+            "nullable": true
+          },
+          "estoque": {
+            "$ref": "#/components/schemas/Estoque"
+          },
+          "iditemNavigation": {
+            "$ref": "#/components/schemas/Item"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProdutoDTO": {
+        "type": "object",
+        "properties": {
+          "idcategoria": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "item": {
+            "type": "string",
+            "nullable": true
+          },
+          "descricaoItem": {
+            "type": "string",
+            "nullable": true
+          },
+          "preco": {
+            "type": "number",
+            "format": "double"
+          },
+          "tipoItem": {
+            "type": "string",
+            "nullable": true
+          },
+          "ativoProdutoServico": {
+            "type": "string",
+            "nullable": true
+          },
+          "codigoPreco": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "precoVenda": {
+            "type": "number",
+            "format": "double"
+          },
+          "unidade": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "WeatherForecast": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "temperatureC": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "temperatureF": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "summary": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

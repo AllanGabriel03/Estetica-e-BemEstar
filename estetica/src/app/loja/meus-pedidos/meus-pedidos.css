@@ -43,7 +43,8 @@
 }
 
 .status.concluido { background: #e6f4ee; color: var(--cor-sucesso); }
-.status.agendado  { background: #fff4d6; color: #8a6d00; }
+.status.emprocessamento { background: #fff4e0; color: #b06a00; }
+.status.aberto    { background: #e3f0fb; color: #1f5f99; }
 .status.cancelado { background: #fde8e8; color: var(--cor-erro); }
 
 #meus-pedidos table {
@@ -101,5 +102,3 @@
   .acoes { flex-direction: column; }
   .cabecalho { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
 }
-
-.status.aberto { background: #e3f0fb; color: #1f5f99; }

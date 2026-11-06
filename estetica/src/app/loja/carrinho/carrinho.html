@@ -1,36 +1,84 @@
 <div id="carrinho">
-    <h2>Carrinho</h2>
+    <div class="topo-secao">
+        <h2 class="titulo-carrinho">
+            <img src="/carrinho-de-compras.png" alt="" class="icone-titulo" />
+            Carrinho
+        </h2>
+        <a routerLink="/catalogo" class="link-botao">Continuar comprando</a>
+    </div>
 
-    <div id="itens-carrinho">
-        @for (item of listaCarrinho(); track item.produto.idItem){
-            <div class="item-carrinho">
-                <span class="dados-produtos">
-                    Id: {{ item.produto.idItem }} | Nome: {{ item.produto.item }} | Descrição: 
-                    {{ item.produto.descricaoItem }} | R$: {{ item.produto.precoVenda }} | Estoque: 
-                    {{ item.produto.quantidadeEstoque }}
-                </span>
+    @if (mensagem()) {
+        <div class="msg-sucesso">{{ mensagem() }}</div>
+    }
+    @if (erro()) {
+        <div class="msg-erro">{{ erro() }}</div>
+    }
 
-                <div class="controle-quantidade">
-                    <label>Quantidade:</label>
-
-                    <input type="number" [value]="item.quantidade" min="1" [max]="item.produto.quantidadeEstoque"
-                      (change)="alterarQuantidade(item,$event)" />
+    <div class="layout-carrinho">
+        <div class="coluna-itens">
+            <div class="cartao">
+                <div class="campo" style="margin-bottom: 0;">
+                    <label for="funcionario">Profissional responsavel</label>
+                    <select id="funcionario" [value]="idFuncionario()" (change)="selecionarFuncionario($event)">
+                        <option value="0">Selecione o profissional</option>
+                        @for (f of funcionarios(); track f.idPessoa) {
+                            <option [value]="f.idPessoa">{{ f.nome }} - {{ f.cargo }}</option>
+                        }
+                    </select>
                 </div>
-
-                <span class="links-lista">
-                    <a class="lnk-excluir" (click)="excluirProduto(item)"> Excluir </a>
-                </span>
             </div>
-        }@empty {
-            <div class="div-item-produto">NENHUM PRODUTO NO CARRINHO</div>
-        }
-    </div>
 
-    <div class="finalizar-pedido">
-        <button type="button" class="btn-finalizar" (click)="finalizarPedido()">Finalizar Pedido</button>
-    </div>
+            <div id="itens-carrinho">
+                @for (item of listaCarrinho(); track item.produto.idItem){
+                    <div class="item-carrinho">
+                        <div class="dados-produtos">
+                            <strong>{{ item.produto.item }}</strong>
+                            <span class="categoria">{{ item.produto.categoria }}</span>
+                            <span class="preco">{{ item.produto.precoVenda | currency:'BRL' }}</span>
+                            @if (item.produto.tipoItem === 'P') {
+                                <small>Estoque disponivel: {{ item.produto.quantidadeEstoque }}</small>
+                            } @else {
+                                <small>Servico</small>
+                            }
+                        </div>
 
-    <div class="resumo-carrinho">
-        <app-resumo-carrinho></app-resumo-carrinho>
+                        <div class="controle-quantidade">
+                            <label>Quantidade</label>
+                            <input
+                                type="number"
+                                [value]="item.quantidade"
+                                min="1"
+                                [max]="maximo(item)"
+                                [disabled]="item.produto.tipoItem !== 'P'"
+                                (change)="alterarQuantidade(item, $event)"
+                            />
+                        </div>
+
+                        <span class="links-lista">
+                            <button type="button" class="lnk-excluir" (click)="excluirProduto(item)">Excluir</button>
+                        </span>
+                    </div>
+                } @empty {
+                    <div class="div-item-produto vazio">
+                        Nenhum item no carrinho.
+                        <a routerLink="/catalogo">Ver produtos</a>
+                        <a routerLink="/servicos">Ver servicos</a>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <aside class="coluna-resumo">
+            <app-resumo-carrinho></app-resumo-carrinho>
+
+            <div class="cartao finalizar-pedido">
+                <button type="button" class="btn-finalizar" [disabled]="finalizando() || listaCarrinho().length === 0" (click)="finalizarPedido()">
+                    {{ finalizando() ? 'Registrando...' : 'Finalizar pedido' }}
+                </button>
+                <small class="dica">
+                    O pedido sera registrado com a situacao <strong>Aberto</strong> e podera ser acompanhado em Meus Pedidos.
+                </small>
+            </div>
+        </aside>
     </div>
 </div>

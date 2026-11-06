@@ -61,3 +61,78 @@ table { width: 100%; border-collapse: collapse; background: var(--cor-card); bor
 th { background: var(--cor-primaria); color: #fff; text-align: left; }
 th, td { padding: 10px 14px; border-bottom: 1px solid var(--cor-borda); }
 tr:hover td { background: #f6eef3; }
+
+/* ===== utilidades compartilhadas (administracao) ===== */
+.pagina { max-width: 1100px; margin: 0 auto; padding: 24px 16px; }
+
+.cartao {
+  background: var(--cor-card);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .04);
+}
+
+.grid-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0 16px;
+}
+
+.campo { display: flex; flex-direction: column; margin-bottom: 14px; }
+.campo label { font-weight: 600; font-size: .9rem; margin-bottom: 4px; }
+.erro { color: var(--cor-erro); font-size: .85rem; margin-top: 4px; }
+
+.acoes { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+
+.btn-secundario { background: transparent; color: var(--cor-primaria-escura); border: 1px solid var(--cor-borda); }
+.btn-perigo { background: var(--cor-erro); }
+
+.lnk-acao {
+  background: none;
+  border: none;
+  color: var(--cor-primaria-escura);
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  font: inherit;
+}
+
+.filtros { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end; margin-bottom: 20px; }
+.filtros .campo { margin-bottom: 0; min-width: 220px; }
+
+.topo-secao {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.msg-sucesso, .msg-erro { margin: 12px 0; }
+
+.tabela-scroll { overflow-x: auto; }
+
+.acoes-tabela {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.tag { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: .75rem; font-weight: 600; }
+.tag-ativo { background: #e6f4ec; color: var(--cor-sucesso); }
+.tag-inativo { background: #fbeaea; color: var(--cor-erro); }
+.tag-baixo { background: #fff4e0; color: #b06a00; }
+
+.link-botao {
+  display: inline-block;
+  background: var(--cor-primaria);
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+}
+.link-botao:hover { background: var(--cor-primaria-escura); }

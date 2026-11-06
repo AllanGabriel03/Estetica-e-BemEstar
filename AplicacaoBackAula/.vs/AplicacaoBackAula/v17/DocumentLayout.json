@@ -1,0 +1,211 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\ALISSON\\CODIFICA\u00C7\u00C3O BACKEND\\PROJETO E BANCO\\AplicacaoBackAula\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8D1FF03C-9D8F-46FC-8E51-DE681CA24AC4}|AplicacaoBackAula\\AplicacaoBackAula.csproj|e:\\alisson\\codifica\u00E7\u00E3o backend\\projeto e banco\\aplicacaobackaula\\aplicacaobackaula\\controllers\\atendimentocontoller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D1FF03C-9D8F-46FC-8E51-DE681CA24AC4}|AplicacaoBackAula\\AplicacaoBackAula.csproj|solutionrelative:aplicacaobackaula\\controllers\\atendimentocontoller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D1FF03C-9D8F-46FC-8E51-DE681CA24AC4}|AplicacaoBackAula\\AplicacaoBackAula.csproj|e:\\alisson\\codifica\u00E7\u00E3o backend\\projeto e banco\\aplicacaobackaula\\aplicacaobackaula\\models\\atendimento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D1FF03C-9D8F-46FC-8E51-DE681CA24AC4}|AplicacaoBackAula\\AplicacaoBackAula.csproj|solutionrelative:aplicacaobackaula\\models\\atendimento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D1FF03C-9D8F-46FC-8E51-DE681CA24AC4}|AplicacaoBackAula\\AplicacaoBackAula.csproj|e:\\alisson\\codifica\u00E7\u00E3o backend\\projeto e banco\\aplicacaobackaula\\aplicacaobackaula\\models\\bdaulabackendcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D1FF03C-9D8F-46FC-8E51-DE681CA24AC4}|AplicacaoBackAula\\AplicacaoBackAula.csproj|solutionrelative:aplicacaobackaula\\models\\bdaulabackendcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D1FF03C-9D8F-46FC-8E51-DE681CA24AC4}|AplicacaoBackAula\\AplicacaoBackAula.csproj|e:\\alisson\\codifica\u00E7\u00E3o backend\\projeto e banco\\aplicacaobackaula\\aplicacaobackaula\\dto\\atendimentoaddputdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D1FF03C-9D8F-46FC-8E51-DE681CA24AC4}|AplicacaoBackAula\\AplicacaoBackAula.csproj|solutionrelative:aplicacaobackaula\\dto\\atendimentoaddputdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D1FF03C-9D8F-46FC-8E51-DE681CA24AC4}|AplicacaoBackAula\\AplicacaoBackAula.csproj|E:\\ALISSON\\CODIFICA\u00C7\u00C3O BACKEND\\PROJETO E BANCO\\AplicacaoBackAula\\aplicacaobackaula\\dto\\atendimentoitemdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D1FF03C-9D8F-46FC-8E51-DE681CA24AC4}|AplicacaoBackAula\\AplicacaoBackAula.csproj|solutionrelative:aplicacaobackaula\\dto\\atendimentoitemdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D1FF03C-9D8F-46FC-8E51-DE681CA24AC4}|AplicacaoBackAula\\AplicacaoBackAula.csproj|e:\\alisson\\codifica\u00E7\u00E3o backend\\projeto e banco\\aplicacaobackaula\\aplicacaobackaula\\dto\\atendimentoitemaddputdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D1FF03C-9D8F-46FC-8E51-DE681CA24AC4}|AplicacaoBackAula\\AplicacaoBackAula.csproj|solutionrelative:aplicacaobackaula\\dto\\atendimentoitemaddputdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D1FF03C-9D8F-46FC-8E51-DE681CA24AC4}|AplicacaoBackAula\\AplicacaoBackAula.csproj|e:\\alisson\\codifica\u00E7\u00E3o backend\\projeto e banco\\aplicacaobackaula\\aplicacaobackaula\\dto\\atendimentodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D1FF03C-9D8F-46FC-8E51-DE681CA24AC4}|AplicacaoBackAula\\AplicacaoBackAula.csproj|solutionrelative:aplicacaobackaula\\dto\\atendimentodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D1FF03C-9D8F-46FC-8E51-DE681CA24AC4}|AplicacaoBackAula\\AplicacaoBackAula.csproj|e:\\alisson\\codifica\u00E7\u00E3o backend\\projeto e banco\\aplicacaobackaula\\aplicacaobackaula\\models\\atendimentoitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D1FF03C-9D8F-46FC-8E51-DE681CA24AC4}|AplicacaoBackAula\\AplicacaoBackAula.csproj|solutionrelative:aplicacaobackaula\\models\\atendimentoitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D1FF03C-9D8F-46FC-8E51-DE681CA24AC4}|AplicacaoBackAula\\AplicacaoBackAula.csproj|e:\\alisson\\codifica\u00E7\u00E3o backend\\projeto e banco\\aplicacaobackaula\\aplicacaobackaula\\dto\\pessoadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D1FF03C-9D8F-46FC-8E51-DE681CA24AC4}|AplicacaoBackAula\\AplicacaoBackAula.csproj|solutionrelative:aplicacaobackaula\\dto\\pessoadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D1FF03C-9D8F-46FC-8E51-DE681CA24AC4}|AplicacaoBackAula\\AplicacaoBackAula.csproj|e:\\alisson\\codifica\u00E7\u00E3o backend\\projeto e banco\\aplicacaobackaula\\aplicacaobackaula\\models\\pessoa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D1FF03C-9D8F-46FC-8E51-DE681CA24AC4}|AplicacaoBackAula\\AplicacaoBackAula.csproj|solutionrelative:aplicacaobackaula\\models\\pessoa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D1FF03C-9D8F-46FC-8E51-DE681CA24AC4}|AplicacaoBackAula\\AplicacaoBackAula.csproj|e:\\alisson\\codifica\u00E7\u00E3o backend\\projeto e banco\\aplicacaobackaula\\aplicacaobackaula\\models\\funcionario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D1FF03C-9D8F-46FC-8E51-DE681CA24AC4}|AplicacaoBackAula\\AplicacaoBackAula.csproj|solutionrelative:aplicacaobackaula\\models\\funcionario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AtendimentoItemDTO.cs",
+              "DocumentMoniker": "E:\\ALISSON\\CODIFICA\u00C7\u00C3O BACKEND\\PROJETO E BANCO\\AplicacaoBackAula\\AplicacaoBackAula\\DTO\\AtendimentoItemDTO.cs",
+              "RelativeDocumentMoniker": "AplicacaoBackAula\\DTO\\AtendimentoItemDTO.cs",
+              "ToolTip": "E:\\ALISSON\\CODIFICA\u00C7\u00C3O BACKEND\\PROJETO E BANCO\\AplicacaoBackAula\\AplicacaoBackAula\\DTO\\AtendimentoItemDTO.cs",
+              "RelativeToolTip": "AplicacaoBackAula\\DTO\\AtendimentoItemDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-17T00:24:08.854Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AtendimentoContoller.cs",
+              "DocumentMoniker": "E:\\ALISSON\\CODIFICA\u00C7\u00C3O BACKEND\\PROJETO E BANCO\\AplicacaoBackAula\\AplicacaoBackAula\\Controllers\\AtendimentoContoller.cs",
+              "RelativeDocumentMoniker": "AplicacaoBackAula\\Controllers\\AtendimentoContoller.cs",
+              "ToolTip": "E:\\ALISSON\\CODIFICA\u00C7\u00C3O BACKEND\\PROJETO E BANCO\\AplicacaoBackAula\\AplicacaoBackAula\\Controllers\\AtendimentoContoller.cs",
+              "RelativeToolTip": "AplicacaoBackAula\\Controllers\\AtendimentoContoller.cs",
+              "ViewState": "AQIAALoAAAAAAAAAAAAIwMoAAAA3AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-19T21:29:25.052Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AtendimentoAddPutDTO.cs",
+              "DocumentMoniker": "E:\\ALISSON\\CODIFICA\u00C7\u00C3O BACKEND\\PROJETO E BANCO\\AplicacaoBackAula\\AplicacaoBackAula\\DTO\\AtendimentoAddPutDTO.cs",
+              "RelativeDocumentMoniker": "AplicacaoBackAula\\DTO\\AtendimentoAddPutDTO.cs",
+              "ToolTip": "E:\\ALISSON\\CODIFICA\u00C7\u00C3O BACKEND\\PROJETO E BANCO\\AplicacaoBackAula\\AplicacaoBackAula\\DTO\\AtendimentoAddPutDTO.cs",
+              "RelativeToolTip": "AplicacaoBackAula\\DTO\\AtendimentoAddPutDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-19T22:11:56.271Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BdAulaBackendContext.cs",
+              "DocumentMoniker": "E:\\ALISSON\\CODIFICA\u00C7\u00C3O BACKEND\\PROJETO E BANCO\\AplicacaoBackAula\\AplicacaoBackAula\\Models\\BdAulaBackendContext.cs",
+              "RelativeDocumentMoniker": "AplicacaoBackAula\\Models\\BdAulaBackendContext.cs",
+              "ToolTip": "E:\\ALISSON\\CODIFICA\u00C7\u00C3O BACKEND\\PROJETO E BANCO\\AplicacaoBackAula\\AplicacaoBackAula\\Models\\BdAulaBackendContext.cs",
+              "RelativeToolTip": "AplicacaoBackAula\\Models\\BdAulaBackendContext.cs",
+              "ViewState": "AQIAAAEAAAAAAAAAAAAgwBIAAAAyAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-19T21:35:31.255Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Atendimento.cs",
+              "DocumentMoniker": "E:\\ALISSON\\CODIFICA\u00C7\u00C3O BACKEND\\PROJETO E BANCO\\AplicacaoBackAula\\AplicacaoBackAula\\Models\\Atendimento.cs",
+              "RelativeDocumentMoniker": "AplicacaoBackAula\\Models\\Atendimento.cs",
+              "ToolTip": "E:\\ALISSON\\CODIFICA\u00C7\u00C3O BACKEND\\PROJETO E BANCO\\AplicacaoBackAula\\AplicacaoBackAula\\Models\\Atendimento.cs",
+              "RelativeToolTip": "AplicacaoBackAula\\Models\\Atendimento.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-19T21:21:14.022Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Atendimentoitem.cs",
+              "DocumentMoniker": "E:\\ALISSON\\CODIFICA\u00C7\u00C3O BACKEND\\PROJETO E BANCO\\AplicacaoBackAula\\AplicacaoBackAula\\Models\\Atendimentoitem.cs",
+              "RelativeDocumentMoniker": "AplicacaoBackAula\\Models\\Atendimentoitem.cs",
+              "ToolTip": "E:\\ALISSON\\CODIFICA\u00C7\u00C3O BACKEND\\PROJETO E BANCO\\AplicacaoBackAula\\AplicacaoBackAula\\Models\\Atendimentoitem.cs",
+              "RelativeToolTip": "AplicacaoBackAula\\Models\\Atendimentoitem.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-19T21:25:54.208Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AtendimentoDTO.cs",
+              "DocumentMoniker": "E:\\ALISSON\\CODIFICA\u00C7\u00C3O BACKEND\\PROJETO E BANCO\\AplicacaoBackAula\\AplicacaoBackAula\\DTO\\AtendimentoDTO.cs",
+              "RelativeDocumentMoniker": "AplicacaoBackAula\\DTO\\AtendimentoDTO.cs",
+              "ToolTip": "E:\\ALISSON\\CODIFICA\u00C7\u00C3O BACKEND\\PROJETO E BANCO\\AplicacaoBackAula\\AplicacaoBackAula\\DTO\\AtendimentoDTO.cs",
+              "RelativeToolTip": "AplicacaoBackAula\\DTO\\AtendimentoDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAuAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-17T00:21:15.242Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AtendimentoItemAddPutDTO.cs",
+              "DocumentMoniker": "E:\\ALISSON\\CODIFICA\u00C7\u00C3O BACKEND\\PROJETO E BANCO\\AplicacaoBackAula\\AplicacaoBackAula\\DTO\\AtendimentoItemAddPutDTO.cs",
+              "RelativeDocumentMoniker": "AplicacaoBackAula\\DTO\\AtendimentoItemAddPutDTO.cs",
+              "ToolTip": "E:\\ALISSON\\CODIFICA\u00C7\u00C3O BACKEND\\PROJETO E BANCO\\AplicacaoBackAula\\AplicacaoBackAula\\DTO\\AtendimentoItemAddPutDTO.cs",
+              "RelativeToolTip": "AplicacaoBackAula\\DTO\\AtendimentoItemAddPutDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-19T22:14:50.693Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Funcionario.cs",
+              "DocumentMoniker": "E:\\ALISSON\\CODIFICA\u00C7\u00C3O BACKEND\\PROJETO E BANCO\\AplicacaoBackAula\\AplicacaoBackAula\\Models\\Funcionario.cs",
+              "RelativeDocumentMoniker": "AplicacaoBackAula\\Models\\Funcionario.cs",
+              "ToolTip": "E:\\ALISSON\\CODIFICA\u00C7\u00C3O BACKEND\\PROJETO E BANCO\\AplicacaoBackAula\\AplicacaoBackAula\\Models\\Funcionario.cs",
+              "RelativeToolTip": "AplicacaoBackAula\\Models\\Funcionario.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-19T21:26:07.538Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Pessoa.cs",
+              "DocumentMoniker": "E:\\ALISSON\\CODIFICA\u00C7\u00C3O BACKEND\\PROJETO E BANCO\\AplicacaoBackAula\\AplicacaoBackAula\\Models\\Pessoa.cs",
+              "RelativeDocumentMoniker": "AplicacaoBackAula\\Models\\Pessoa.cs",
+              "ToolTip": "E:\\ALISSON\\CODIFICA\u00C7\u00C3O BACKEND\\PROJETO E BANCO\\AplicacaoBackAula\\AplicacaoBackAula\\Models\\Pessoa.cs",
+              "RelativeToolTip": "AplicacaoBackAula\\Models\\Pessoa.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-19T21:26:11.627Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "PessoaDTO.cs",
+              "DocumentMoniker": "E:\\ALISSON\\CODIFICA\u00C7\u00C3O BACKEND\\PROJETO E BANCO\\AplicacaoBackAula\\AplicacaoBackAula\\DTO\\PessoaDTO.cs",
+              "RelativeDocumentMoniker": "AplicacaoBackAula\\DTO\\PessoaDTO.cs",
+              "ToolTip": "E:\\ALISSON\\CODIFICA\u00C7\u00C3O BACKEND\\PROJETO E BANCO\\AplicacaoBackAula\\AplicacaoBackAula\\DTO\\PessoaDTO.cs",
+              "RelativeToolTip": "AplicacaoBackAula\\DTO\\PessoaDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-19T21:49:55.097Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,32 +1,39 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { CurrencyPipe } from '@angular/common';
 import { CarrinhoService } from '../../services/carrinho';
-import { Router } from '@angular/router';
 import { ItemCarrinho } from '../../models/item-carrinho';
-import { AtendimentoService } from '../../services/atendimento-service';
-import { AtendimentoAddPut } from '../../models/atendimento-add-put';
 import { SessaoService } from '../../services/sessao-service';
+import { FuncionarioService } from '../../services/funcionario-service';
+import { FuncionarioResponse } from '../../models/funcionarioResponse';
 import { ResumoCarrinho } from '../../resumo-carrinho/resumo-carrinho';
 
-const ID_FUNCIONARIO_PADRAO = 2; // precisa ser um idpessoa que exista na tabela funcionario
-
 @Component({
-  imports: [ResumoCarrinho],
+  imports: [ResumoCarrinho, RouterLink, CurrencyPipe],
   selector: 'app-carrinho',
   styleUrl: './carrinho.css',
   templateUrl: './carrinho.html',
 })
-export class Carrinho {
-  listaCarrinho = signal<ItemCarrinho[]>([]);
+export class Carrinho implements OnInit {
+  private router = inject(Router);
+  private carrinhoService = inject(CarrinhoService);
+  private sessao = inject(SessaoService);
+  private funcionarioService = inject(FuncionarioService);
 
-  constructor(
-    private router: Router,
-    private carrinhoService: CarrinhoService,
-    private atendimentoService: AtendimentoService,
-    private sessao: SessaoService,
-  ) {}
+  listaCarrinho = signal<ItemCarrinho[]>([]);
+  funcionarios = signal<FuncionarioResponse[]>([]);
+  idFuncionario = signal(0);
+  mensagem = signal('');
+  erro = signal('');
+  finalizando = signal(false);
 
   ngOnInit() {
     this.listarItens();
+
+    this.funcionarioService.listar().subscribe({
+      next: (lista) => this.funcionarios.set(lista),
+      error: () => this.erro.set('Nao foi possivel carregar os profissionais.'),
+    });
   }
 
   listarItens() {
@@ -36,64 +43,65 @@ export class Carrinho {
     );
   }
 
+  selecionarFuncionario(event: Event) {
+    this.idFuncionario.set(Number((event.target as HTMLSelectElement).value));
+  }
+
   excluirProduto(item: ItemCarrinho) {
-    if (confirm(`Deseja excluir ${item.produto.item} do carrinho? `)) {
-      this.carrinhoService.removerDoCarrinho(item.produto.idItem);
-      this.listarItens();
-    }
+    this.carrinhoService.removerDoCarrinho(item.produto.idItem);
+    this.listarItens();
+    this.mensagem.set('Item removido do carrinho.');
+    this.erro.set('');
   }
 
   alterarQuantidade(item: ItemCarrinho, event: Event) {
     const input = event.target as HTMLInputElement;
     const quantidade = Number(input.value);
 
-    if (quantidade >= 1 && quantidade <= item.produto.quantidadeEstoque) {
-      this.carrinhoService.alterarQuantidade(item.produto.idItem, quantidade);
-      this.listarItens();
-    }
+    this.carrinhoService.alterarQuantidade(item.produto.idItem, quantidade);
+    this.listarItens();
+  }
+
+  maximo(item: ItemCarrinho): number {
+    return item.produto.tipoItem === 'P'
+      ? Math.max(1, item.produto.quantidadeEstoque)
+      : 1;
   }
 
   finalizarPedido() {
+    this.mensagem.set('');
+    this.erro.set('');
+
     const itens = this.carrinhoService.listar();
 
     if (itens.length === 0) {
-      alert('O carrinho está vazio.');
+      this.erro.set('O carrinho esta vazio.');
       return;
     }
 
     const idPessoa = this.sessao.idPessoa();
+
     if (!idPessoa) {
-      alert('Faça seu cadastro para finalizar o pedido.');
-      this.router.navigate(['/cadastro']); // ajuste para a sua rota de cadastro
+      this.router.navigate(['/login'], { queryParams: { destino: '/carrinho' } });
       return;
     }
 
-    const novoAtendimento: AtendimentoAddPut = {
-      idAtendimento: 0,
-      idPessoa,
-      dataAtendimento: new Date().toLocaleDateString('en-CA'),
-      statusAtendimento: 'A',
-      itens: itens.map((item) => ({
-        idAtendimento: 0,
-        idItem: item.produto.idItem,
-        idFuncionario: ID_FUNCIONARIO_PADRAO,
-        quantidade: item.quantidade,
-        valorUnitario: item.produto.precoVenda,
-      })),
-    };
+    if (!this.idFuncionario()) {
+      this.erro.set('Selecione o profissional responsavel pelo atendimento.');
+      return;
+    }
 
-    console.log('Pedido enviado:', JSON.stringify(novoAtendimento, null, 2));
+    this.finalizando.set(true);
 
-    this.atendimentoService.criar(novoAtendimento).subscribe({
+    this.carrinhoService.finalizar(idPessoa, this.idFuncionario()).subscribe({
       next: () => {
-        alert('Atendimento registrado com sucesso!');
-        this.carrinhoService.limparCarrinho();
+        this.finalizando.set(false);
+        this.mensagem.set('Pedido registrado com sucesso! Acompanhe em Meus Pedidos.');
         this.listarItens();
-        this.router.navigate(['/catalogo']);
       },
-      error: (erro) => {
-        console.log('Erro ao finalizar atendimento', erro);
-        alert(erro.error?.mensagem ?? 'Erro ao registrar o atendimento.');
+      error: (e) => {
+        this.finalizando.set(false);
+        this.erro.set(e.error?.mensagem ?? 'Nao foi possivel registrar o pedido.');
       },
     });
   }

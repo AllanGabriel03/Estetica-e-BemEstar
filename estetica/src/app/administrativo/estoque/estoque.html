@@ -1,0 +1,186 @@
+<div class="pagina">
+  <div class="topo-secao">
+    <h2>Estoque</h2>
+  </div>
+
+  @if (mensagem()) {
+    <div class="msg-sucesso">{{ mensagem() }}</div>
+  }
+  @if (erro()) {
+    <div class="msg-erro">{{ erro() }}</div>
+  }
+
+  <div class="cartao">
+    <h3>Registrar entrada de produto</h3>
+
+    <form [formGroup]="form" (ngSubmit)="registrarEntrada()">
+      <div class="grid-form">
+        <div class="campo">
+          <label for="idItem">Produto</label>
+          <select id="idItem" formControlName="idItem">
+            <option [ngValue]="0">Selecione</option>
+            @for (p of produtos(); track p.idItem) {
+              <option [ngValue]="p.idItem">{{ p.item }}</option>
+            }
+          </select>
+          @if (campoInvalido('idItem')) {
+            <small class="erro">Selecione o produto.</small>
+          }
+        </div>
+
+        <div class="campo">
+          <label for="quantidade">Quantidade</label>
+          <input id="quantidade" type="number" min="1" formControlName="quantidade" />
+          @if (campoInvalido('quantidade')) {
+            <small class="erro">A quantidade deve ser maior que zero.</small>
+          }
+        </div>
+
+        <div class="campo">
+          <label for="unidade">Unidade</label>
+          <input id="unidade" type="text" maxlength="10" formControlName="unidade" placeholder="UN, ML, KG..." />
+          <small class="dica">Opcional. Se vazio, usa a unidade do produto.</small>
+          @if (campoInvalido('unidade')) {
+            <small class="erro">A unidade deve ter no maximo 10 caracteres.</small>
+          }
+        </div>
+
+        <div class="campo">
+          <label for="valorUnitario">Valor unitario (R$)</label>
+          <input id="valorUnitario" type="number" min="0.01" step="0.01" formControlName="valorUnitario" />
+          @if (campoInvalido('valorUnitario')) {
+            <small class="erro">Informe um valor unitario valido.</small>
+          }
+        </div>
+
+        <div class="campo">
+          <label for="dataEntrada">Data da entrada</label>
+          <input id="dataEntrada" type="date" formControlName="dataEntrada" />
+          @if (campoInvalido('dataEntrada')) {
+            <small class="erro">Informe a data da entrada.</small>
+          }
+        </div>
+      </div>
+
+      <div class="acoes">
+        <button type="submit" [disabled]="salvando()">
+          {{ salvando() ? 'Registrando...' : 'Registrar entrada' }}
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="cartao" style="margin-top: 24px;">
+    <div class="filtros">
+      <div class="campo">
+        <label for="idConsulta">Consultar estoque por ID do produto</label>
+        <div class="linha-consulta">
+          <input
+            id="idConsulta"
+            type="number"
+            min="1"
+            [value]="idConsulta()"
+            (input)="idConsulta.set($any($event.target).value)"
+          />
+          <button type="button" (click)="consultarPorId()">Buscar</button>
+        </div>
+      </div>
+    </div>
+
+    @if (consulta(); as c) {
+      <div class="consulta-resultado">
+        <div>
+          <strong>Produto #{{ c.idItem }} - {{ c.item }}</strong>
+          <p>
+            Categoria: {{ c.categoria }} | Unidade: {{ c.unidade }} |
+            Custo: {{ c.preco | currency:'BRL' }} | Venda: {{ c.precoVenda | currency:'BRL' }}
+          </p>
+          <p>
+            Quantidade em estoque:
+            <span [class]="c.quantidadeEstoque <= 5 ? 'tag tag-baixo' : 'tag tag-ativo'">
+              {{ c.quantidadeEstoque }}
+            </span>
+            | Situacao: {{ c.ativo === 'S' ? 'Ativo' : 'Inativo' }}
+          </p>
+        </div>
+        <button type="button" class="lnk-acao" (click)="limparConsulta()">Fechar consulta</button>
+      </div>
+    }
+  </div>
+
+  <div class="cartao tabela-scroll" style="margin-top: 24px;">
+    <h3>Posicao de estoque</h3>
+
+    @if (carregando()) {
+      <p>Carregando estoque...</p>
+    } @else {
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Produto</th>
+            <th>Categoria</th>
+            <th>Unidade</th>
+            <th>Preco de venda</th>
+            <th>Quantidade</th>
+            <th>Situacao</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (e of estoque(); track e.idItem) {
+            <tr>
+              <td>{{ e.idItem }}</td>
+              <td>{{ e.item }}</td>
+              <td>{{ e.categoria }}</td>
+              <td>{{ e.unidade }}</td>
+              <td>{{ e.precoVenda | currency:'BRL' }}</td>
+              <td>
+                <span [class]="e.quantidadeEstoque <= 5 ? 'tag tag-baixo' : 'tag tag-ativo'">
+                  {{ e.quantidadeEstoque }}
+                </span>
+              </td>
+              <td>
+                <span [class]="e.ativo === 'S' ? 'tag tag-ativo' : 'tag tag-inativo'">
+                  {{ e.ativo === 'S' ? 'Ativo' : 'Inativo' }}
+                </span>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="7">Nenhum produto em estoque.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  </div>
+
+  <div class="cartao tabela-scroll" style="margin-top: 24px;">
+    <h3>Ultimas entradas</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Produto</th>
+          <th>Quantidade</th>
+          <th>Valor unitario</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (entrada of entradas(); track entrada.idEntrada) {
+          <tr>
+            <td>{{ entrada.dataEntrada | date:'dd/MM/yyyy' }}</td>
+            <td>{{ entrada.item }}</td>
+            <td>{{ entrada.quantidade }} {{ entrada.unidade }}</td>
+            <td>{{ entrada.valorUnitario | currency:'BRL' }}</td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="4">Nenhuma entrada registrada.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

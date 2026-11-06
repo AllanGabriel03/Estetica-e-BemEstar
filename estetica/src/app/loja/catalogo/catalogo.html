@@ -1,22 +1,78 @@
 <div id="div-catalogo">
-    <h1> Catalogo </h1>
+  <div class="topo-catalogo">
+    <h1>{{ titulo }}</h1>
+    <p class="subtitulo">
+      {{ tipo === 'S' ? 'Escolha seus servicos e agende com nossas profissionais.' : 'Produtos selecionados para cuidar de voce em casa.' }}
+    </p>
+  </div>
 
-    <div id="div-lista-produtos">
-        @for(elem of listaProduto(); track elem.idItem){
-            <div class="div-item-produto">
-                <span class="item-produto">
-                    {{elem.idItem}} - {{elem.idCategoria}} - {{elem.categoria}} - {{elem.item}} - {{elem.descricaoItem}} - 
-                    {{elem.preco}} - {{elem.tipoItem}} - {{elem.ativoProdutoServico}} - {{elem.codigoPreco}} - 
-                    {{elem.precoVenda}} - {{elem.unidade}} - {{elem.quantidadeEstoque}}
-                </span>
-                <span class="btns-catalogo">
-                    <button class="lnk-adicionar" (click)="adicionarAoCarrinho(elem)"> Adicionar </button>
-                </span>
-            </div>
-        }@empty {
-            <div class="div-item-produto">
-                NENHUM PRODUTO DISPONIVEL
-            </div>
-        }
+  <div class="filtros">
+    <div class="campo">
+      <label for="busca">Buscar</label>
+      <input
+        id="busca"
+        type="search"
+        [value]="busca()"
+        (input)="filtrarBusca($event)"
+        placeholder="Nome ou descricao"
+      />
     </div>
+
+    <div class="campo">
+      <label for="categoria">Categoria</label>
+      <select id="categoria" [value]="idCategoria()" (change)="filtrarCategoria($event)">
+        <option value="0">Todas as categorias</option>
+        @for (categoria of categoriasDisponiveis(); track categoria.idcategoria) {
+          <option [value]="categoria.idcategoria">{{ categoria.categoria }}</option>
+        }
+      </select>
+    </div>
+  </div>
+
+  @if (mensagem()) {
+    <div class="msg-sucesso">{{ mensagem() }}</div>
+  }
+  @if (erro()) {
+    <div class="msg-erro">{{ erro() }}</div>
+  }
+
+  @if (carregando()) {
+    <p>Carregando catalogo...</p>
+  } @else {
+    <div id="div-lista-produtos">
+      @for (elem of filtrados(); track elem.idItem) {
+        <div class="div-item-produto" tabindex="0">
+          <div class="info-produto">
+            <span class="categoria-produto">{{ elem.categoria }}</span>
+            <h3 class="nome-produto">{{ elem.item }}</h3>
+
+            <div class="descricao-produto">
+              <p>{{ elem.descricaoItem }}</p>
+            </div>
+
+            <strong class="preco-produto">{{ elem.precoVenda | currency:'BRL' }}</strong>
+
+            @if (elem.tipoItem === 'P') {
+              <small [class]="semEstoque(elem) ? 'estoque tag-inativo' : 'estoque'">
+                {{ semEstoque(elem) ? 'Sem estoque' : 'Em estoque: ' + elem.quantidadeEstoque }}
+              </small>
+            }
+          </div>
+
+          <span class="btns-catalogo">
+            <button
+              class="lnk-adicionar"
+              type="button"
+              [disabled]="semEstoque(elem)"
+              (click)="adicionarAoCarrinho(elem)"
+            >
+              {{ semEstoque(elem) ? 'Indisponivel' : 'Adicionar' }}
+            </button>
+          </span>
+        </div>
+      } @empty {
+        <div class="div-item-produto">NENHUM ITEM ENCONTRADO</div>
+      }
+    </div>
+  }
 </div>

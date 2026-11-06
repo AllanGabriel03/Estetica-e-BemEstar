@@ -49,6 +49,25 @@ export class MeusPedidos implements OnInit {
   }
 
   statusClasse(status: string): string {
-    return status.toLowerCase().replace(/[^a-z]/g, '');
+    return this.statusNome(status)
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z]/g, '');
+  }
+
+  statusNome(status: string): string {
+    switch (status) {
+      case 'A':
+        return 'Aberto';
+      case 'P':
+        return 'Em processamento';
+      case 'F':
+        return 'Concluído';
+      case 'C':
+        return 'Cancelado';
+      default:
+        return status;
+    }
   }
 }

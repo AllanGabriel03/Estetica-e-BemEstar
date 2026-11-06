@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Atendimento } from '../models/atendimento';
@@ -12,16 +12,21 @@ export class AtendimentoService {
 
   constructor(private http: HttpClient) {}
 
-  listar(): Observable<Atendimento[]> {
-    return this.http.get<Atendimento[]>(this.urlBase);
+  listar(status?: string, idPessoa?: number): Observable<Atendimento[]> {
+    let params = new HttpParams();
+
+    if (status) params = params.set('status', status);
+    if (idPessoa) params = params.set('idPessoa', idPessoa);
+
+    return this.http.get<Atendimento[]>(this.urlBase, { params });
   }
 
   listarPorCliente(idPessoa: number): Observable<Atendimento[]> {
-    return this.http.get<Atendimento[]>(`${this.urlBase}?idPessoa=${idPessoa}`);
+    return this.listar(undefined, idPessoa);
   }
 
   listarEmAberto(): Observable<Atendimento[]> {
-    return this.http.get<Atendimento[]>(`${this.urlBase}?status=Aberto`);
+    return this.listar('A');
   }
 
   buscarPorId(id: number): Observable<Atendimento> {
@@ -30,5 +35,9 @@ export class AtendimentoService {
 
   criar(atendimento: AtendimentoAddPut): Observable<AtendimentoAddPut> {
     return this.http.post<AtendimentoAddPut>(this.urlBase, atendimento);
+  }
+
+  atualizarStatus(id: number, status: string): Observable<unknown> {
+    return this.http.patch(`${this.urlBase}/${id}/status`, { status });
   }
 }

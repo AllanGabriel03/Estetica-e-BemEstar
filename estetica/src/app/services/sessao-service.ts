@@ -1,27 +1,36 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, computed, signal } from '@angular/core';
+import { Pessoa } from '../models/pessoa';
 
 @Injectable({ providedIn: 'root' })
 export class SessaoService {
-  private chave = 'idPessoaCliente';
+  private chave = 'clienteEstetica';
 
-  idPessoa = signal<number | null>(this.ler());
+  cliente = signal<Pessoa | null>(this.ler());
 
-  private ler(): number | null {
+  idPessoa = computed(() => this.cliente()?.idPessoa ?? null);
+
+  estaLogado = computed(() => this.cliente() !== null);
+
+  private ler(): Pessoa | null {
     try {
-      const v = localStorage.getItem(this.chave);
-      return v ? Number(v) : null;
+      const valor = localStorage.getItem(this.chave);
+      return valor ? (JSON.parse(valor) as Pessoa) : null;
     } catch {
       return null;
     }
   }
 
-  definir(id: number) {
-    this.idPessoa.set(id);
-    try { localStorage.setItem(this.chave, String(id)); } catch {}
+  entrar(pessoa: Pessoa) {
+    this.cliente.set(pessoa);
+    try {
+      localStorage.setItem(this.chave, JSON.stringify(pessoa));
+    } catch {}
   }
 
   sair() {
-    this.idPessoa.set(null);
-    try { localStorage.removeItem(this.chave); } catch {}
+    this.cliente.set(null);
+    try {
+      localStorage.removeItem(this.chave);
+    } catch {}
   }
 }
